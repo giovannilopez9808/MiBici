@@ -12,7 +12,6 @@ parameters = {"path data": "../Output/",
               "file data": "Daily_count.csv"}
 data = pd.read_csv("{}{}".format(parameters["path data"],
                                  parameters["file data"]))
-data.columns = ["Date", "Count"]
 data = format_data(data)
 data = data.resample("MS").mean()
 plt.subplots(figsize=(9, 3))

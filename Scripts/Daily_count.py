@@ -3,6 +3,11 @@ import calendar
 import os
 
 
+def read_data(path: str, file: str):
+    data = pd.read_csv("{}{}".format(path, file))
+    return data
+
+
 def obtain_year_and_month_from_filename(file: str):
     filename = file.replace(".csv", "")
     filename = filename.split("_")
@@ -18,13 +23,9 @@ def obtain_period_from_filenames(files: list):
     period = []
     for i in range(2):
         date = dates[i]
-        date = date.replace(".csv",
-                            "")
-        date = date.split("_")
-        year, month = date
-        if i == 0:
-            day = 1
-        else:
+        year, month = obtain_year_and_month_from_filename(date)
+        day = 1
+        if i == 1:
             day = calendar.monthrange(int(year),
                                       int(month))[i]
         day = str(day).zfill(2)
@@ -43,6 +44,14 @@ def obtain_consecutive_dates_from_period(period: list):
     return dates
 
 
+def create_daily_dataframe(index: list):
+    data = pd.DataFrame(index=index,
+                        columns=["Count"])
+    data.index.names = ["Date"]
+    data = data.fillna(0)
+    return data
+
+
 parameters = {"path data": "../Data/",
               "path output": "../Output/",
               "useless columns": ["Usuario_Id",
@@ -55,17 +64,15 @@ parameters = {"path data": "../Data/",
 files = sorted(os.listdir(parameters["path data"]))
 period = obtain_period_from_filenames(files)
 dates = obtain_consecutive_dates_from_period(period)
-daily_count = pd.DataFrame(index=dates,
-                           columns=["Count"])
-daily_count = daily_count.fillna(0)
+daily_count = create_daily_dataframe(dates)
 for file in files:
     print("Analizando archivo {}".format(file))
-    data = pd.read_csv("{}{}".format(parameters["path data"],
-                                     file))
+    data = read_data(parameters["path data"],
+                     file)
     data.index = pd.to_datetime(data["Inicio_del_viaje"])
     data = data.drop(columns=parameters["useless columns"])
     data = data.resample("D").count()
     for index in data.index:
         date = (data["Viaje_Id"][index])
         daily_count["Count"][index.date()] = date
-daily.to_csv("{}Daily_count.csv".format(parameters["path output"]))
+daily_count.to_csv("{}Daily_count.csv".format(parameters["path output"]))
