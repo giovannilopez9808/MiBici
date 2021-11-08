@@ -33,8 +33,8 @@ parameters = {"path data": "../Data/",
               "path information": "../Information/",
               "path map": "../Graphics/",
               "file information": "nomenclatura.csv",
-              "file coordinates": "coordinates2.csv",
-              "photo map": "map2.png"}
+              "file coordinates": "coordinates.csv",
+              "photo map": "map.png"}
 
 info = read_data(parameters["path information"],
                  parameters["file information"])
