@@ -11,19 +11,6 @@ def clean_data(data: DataFrame, columns: list) -> DataFrame:
     return data
 
 
-def create_stations_dataframe(index: list, columns: list) -> DataFrame:
-    """
-    Creacion de un dataframe dadas un indice y columnas
-    """
-    data = pd.DataFrame(index=index,
-                        columns=columns)
-    # Nombre del indice
-    data.index.names = ["id"]
-    # Inicializacion de los datos
-    data = data.fillna(0)
-    return data
-
-
 parameters = {"path data": "../Data/",
               "path information": "../Information/",
               "file information": "nomenclatura.csv",

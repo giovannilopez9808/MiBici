@@ -1,20 +1,4 @@
 from Functions import *
-import pandas as pd
-import os
-
-
-def create_daily_dataframe(index: list) -> DataFrame:
-    """ 
-    Crea un dataframe dado un indice y con una columna de titulo count
-    """
-    data = pd.DataFrame(index=index,
-                        columns=["Count"])
-    # Header del index, este aparecera al momento de guardar el documento
-    data.index.names = ["Date"]
-    # Inicializacion del conteo
-    data = data.fillna(0)
-    return data
-
 
 parameters = {"path data": "../Data/",
               "path output": "../Output/",
@@ -32,7 +16,7 @@ period = obtain_period_from_filenames(files)
 # Obtiene los dias consecutivos entre el periodo obtenido
 dates = obtain_consecutive_dates_from_period(period)
 # Creacion del dataframe que guardara los conteos de cada estacion
-daily_count = create_daily_dataframe(dates)
+daily_count = create_daily_dataframe(dates, "Count")
 # Ciclo para variar entre los archivos
 for file in files:
     print("Analizando archivo {}".format(file))

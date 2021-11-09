@@ -1,6 +1,7 @@
 from pandas.core.frame import DataFrame
 from datetime import datetime
 import pandas as pd
+import numpy as np
 import calendar
 import os
 
@@ -14,11 +15,15 @@ def format_data(data: DataFrame) -> DataFrame:
     return data
 
 
-def read_data(path: str, file: str) -> DataFrame:
+def read_data(path: str, file: str, use_index=False) -> DataFrame:
     """ 
     Lectura de los datos
     """
-    data = pd.read_csv("{}{}".format(path, file))
+    if use_index:
+        data = pd.read_csv("{}{}".format(path, file),
+                           index_col=0)
+    else:
+        data = pd.read_csv("{}{}".format(path, file))
     return data
 
 
@@ -85,6 +90,49 @@ def obtain_consecutive_dates_from_period(period: list) -> list:
         # Añadida a la lista
         dates.append(date)
     return dates
+
+
+def create_daily_dataframe(index: list, header: str, use_float=False) -> DataFrame:
+    """ 
+    Crea un dataframe dado un indice y con una columna de titulo count
+    """
+    data = pd.DataFrame(index=index,
+                        columns=[header])
+    # Header del index, este aparecera al momento de guardar el documento
+    data.index.names = ["Date"]
+    # Inicializacion del conteo
+    if(use_float):
+        data = data.fillna(0.0)
+    else:
+        data = data.fillna(0)
+    return data
+
+
+def create_stations_dataframe(index: list, columns: list, use_float=False) -> DataFrame:
+    """
+    Creacion de un dataframe dadas un indice y columnas
+    """
+    data = pd.DataFrame(index=index,
+                        columns=columns)
+    # Nombre del indice
+    data.index.names = ["id"]
+    # Inicializacion de los datos
+    if(use_float):
+        data = data.fillna(0.0)
+    else:
+        data = data.fillna(0)
+    return data
+
+
+def obtain_distance_bewteen_points(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
+    rad = np.pi/180
+    dlat = lat2-lat1
+    dlon = lon2-lon1
+    R = 6372.795477598
+    a = (np.sin(rad*dlat/2))**2 + np.cos(rad*lat1) * \
+        np.cos(rad*lat2)*(np.sin(rad*dlon/2))**2
+    distancia = 2*R*np.arcsin(np.sqrt(a))
+    return distancia
 
 
 def obtain_filenames(path: str) -> list:
