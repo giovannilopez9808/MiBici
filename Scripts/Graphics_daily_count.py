@@ -1,20 +1,17 @@
 import matplotlib.pyplot as plt
-import pandas as pd
-
-
-def format_data(data: pd.DataFrame):
-    data.index = pd.to_datetime(data["Date"])
-    data = data.drop(columns="Date")
-    return data
-
+from Functions import *
 
 parameters = {"path data": "../Output/",
               "file data": "Daily_count.csv"}
+# Lectura de los datos
 data = pd.read_csv("{}{}".format(parameters["path data"],
                                  parameters["file data"]))
+# Formato de los datos
 data = format_data(data)
+# Calculo del promedio mensual
 data = data.resample("MS").mean()
 plt.subplots(figsize=(9, 3))
+# Ploteo de los datos
 plt.scatter(data.index, data["Count"])
 plt.tight_layout()
 plt.show()

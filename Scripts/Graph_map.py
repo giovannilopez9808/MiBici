@@ -9,28 +9,36 @@ parameters = {"path data": "../Data/",
               "photo map": "map.png",
               "output map": "stations.png"}
 
-info = read_data(parameters["path information"],
-                 parameters["file information"])
+# Obtiene los datos de las estaciones
+stations_data = read_data(parameters["path information"],
+                          parameters["file information"])
+#   Obtiene la lista de coordenadas de los vertices del mapa
 coordinates = np.loadtxt("{}{}".format(parameters["path information"],
                                        parameters["file coordinates"]),
                          delimiter=",")
+#  Lectura el mapa dentro de una clase
 map = Map_class(parameters["path map"],
                 parameters["photo map"])
-map_pixel = map.obtain_map_pixel()
-info = transform_coordenates_to_pixel_location(map,
-                                               coordinates,
-                                               info)
+# Transforma las coordenadas de las estaciones a pixeles
+stations_data = transform_coordinates_to_pixel_location(map,
+                                                        coordinates,
+                                                        stations_data)
+# Borrado de los ticks
 plt.axis("off")
-plt.scatter(info["longitude"],
-            info["latitude"],
+# Plot de las estaciones
+plt.scatter(stations_data["longitude"],
+            stations_data["latitude"],
             alpha=0.7,
             c="#76c893")
+# Plot del mapa
 plt.imshow(map.img,
            origin="lower")
+# Ajuste del plot
 plt.subplots_adjust(left=0,
                     bottom=0.05,
                     right=1,
                     top=0.95)
+# Guardado del plot
 plt.savefig("{}{}".format(parameters["path map"],
                           parameters["output map"]),
             bbox_inches="tight",
