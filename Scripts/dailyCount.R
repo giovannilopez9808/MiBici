@@ -26,3 +26,4 @@ for( datafile in list.files()) {
     rm(data_list)
 }
 write.table(df, file="../Output/Daily_count.csv", sep=",", row.names = FALSE, quote = FALSE)
+
