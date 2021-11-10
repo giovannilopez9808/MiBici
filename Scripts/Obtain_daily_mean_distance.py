@@ -1,3 +1,4 @@
+from numpy import SHIFT_DIVIDEBYZERO
 from Functions import *
 pd.options.mode.chained_assignment = None
 
@@ -37,6 +38,24 @@ def fill_distance_data(data: DataFrame, distance_data: DataFrame) -> DataFrame:
     return data
 
 
+def filter_data(data: DataFrame, stations: list) -> DataFrame:
+    stations = list(stations)
+    labels = ["Origen_Id", "Destino_Id"]
+    for index in data.index:
+        labels_id_i = np.array(data[labels[0]][index])
+        labels_id_j = np.array(data[labels[1]][index])
+        size = np.size(labels_id_i)
+        if size > 1:
+            for i in range(size):
+                if (not(labels_id_i[i] in stations) or not(labels_id_j[i] in stations)):
+                    data = data.drop(index)
+        else:
+            if (not(labels_id_i in stations) or not(labels_id_j in stations)):
+                data = data.drop(index)
+
+    return data
+
+
 parameters = {"path output": "../Output/",
               "path data": "../Data/",
               "path information": "../Information/",
@@ -65,6 +84,8 @@ for file in files:
                      file)
     data = format_data(data,
                        parameters["useless columns"])
+    data = filter_data(data,
+                       distance_data.index)
     data = fill_distance_data(data,
                               distance_data)
 
