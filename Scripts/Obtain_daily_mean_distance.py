@@ -1,4 +1,3 @@
-from numpy import SHIFT_DIVIDEBYZERO
 from Functions import *
 pd.options.mode.chained_assignment = None
 
@@ -24,11 +23,12 @@ def fill_distance_data(data: DataFrame, distance_data: DataFrame) -> DataFrame:
         index_list_j = np.array(data["Destino_Id"][index])
         size = np.size(index_list_i)
         if size > 1:
+            distance = 0
             for pos in range(size):
                 index_i = index_list_i[pos]
                 index_j = index_list_j[pos]
-                distance = distance_data[str(index_i)][index_j]
-                data["Distance"][index] = distance
+                distance += distance_data[str(index_i)][index_j]
+            data["Distance"][index] = distance / size
         else:
             index_i = index_list_i
             index_j = index_list_j
