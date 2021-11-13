@@ -92,6 +92,7 @@ for file in files:
     daily_data = data.resample("D").mean()
     for date in daily_data.index:
         index = date.date()
-        daily_data_output["Mean distance"][index] = daily_data["Distance"][date]
+        value = daily_data["Distance"][date]
+        daily_data_output["Mean distance"][index] = value
 daily_data_output.to_csv("{}{}".format(parameters["path output"],
                                        parameters["file output"]))
