@@ -17,8 +17,8 @@ initial_month <- 3
 final_month <- 5
 dframe <- data.frame(Usuario_Id = c(), age = c())
 
-for (i in initial_month:final_month) {
-  filename <- str_pad(i, 2, pad = "0")
+for (month in initial_month:final_month) {
+  filename <- str_pad(month, 2, pad = "0")
   filename <- paste(yr, "_", filename, ".csv", sep = "")
   print(filename)
   data <- read.csv(paste(path_data, filename, sep = ""))
@@ -45,7 +45,7 @@ age <- unlist(dframe[
 ])
 rm(dframe)
 # media
-m <- mean(age)
+mu <- mean(age)
 # Graficacion con ggplot
 df <- data.frame(edad = age[!is.na(age)])
 p <- ggplot(
@@ -59,7 +59,7 @@ p <- ggplot(
     fill = "lightblue",
     alpha = 0.5
   ) +
-  geom_vline(aes(xintercept = m),
+  geom_vline(aes(xintercept = mu),
     color = "red",
     linetype = "dashed",
     size = 0.9
@@ -78,11 +78,11 @@ p <- ggplot(
     y = "Número de usuarios"
   ) +
   annotate("text",
-    x = m + 10,
+    x = mu + 10,
     y = 3000,
     label = paste(
       "mean =",
-      m
+      round(mu, 4)
     )
   )
 ggsave(paste(path_graphics, "edades_c.png", sep = ""),
