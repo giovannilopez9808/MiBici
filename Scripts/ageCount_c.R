@@ -1,4 +1,5 @@
 library(ggplot2)
+library(stringr)
 theme_set(theme_classic())
 dir <- getwd()
 path_data <- sub(
@@ -12,21 +13,39 @@ path_graphics <- sub(
   dir
 )
 yr <- 2019
-mes <- 12
+initial_month <- 3
+final_month <- 5
+dframe <- data.frame(Usuario_Id = c(), age = c())
 
-
-data <- read.csv(paste(path_data, yr, "_", mes, ".csv", sep = ""))
-# Usuarios unicos
-# usrs <- unique(data["Usuario_Id"])
-# Edad de cada usuario
-age <- 2020 - data[
-  as.numeric(row.names(unique(data["Usuario_Id"]))),
-  "Año_de_nacimiento"
-]
-
-
+for (i in initial_month:final_month) {
+  filename <- str_pad(i, 2, pad = "0")
+  filename <- paste(yr, "_", filename, ".csv", sep = "")
+  print(filename)
+  data <- read.csv(paste(path_data, filename, sep = ""))
+  # Usuarios unicos
+  usrs <- unique(data["Usuario_Id"])
+  age <- yr - data[
+    as.numeric(row.names(unique(data["Usuario_Id"]))),
+    "Año_de_nacimiento"
+  ]
+  dff <- data.frame(usrs, age)
+  rm(data)
+  rm(usrs)
+  tmp <- dframe
+  # union de datos previos y nuevos
+  dframe <- unique(rbind(tmp, dff))
+  rm(tmp)
+  rm(dff)
+}
+rm(age)
+# Edades
+age <- unlist(dframe[
+  !is.na(dframe["age"]),
+  "age"
+])
+rm(dframe)
 # media
-m <- mean(age[!is.na(age)])
+m <- mean(age)
 # Graficacion con ggplot
 df <- data.frame(edad = age[!is.na(age)])
 p <- ggplot(
@@ -40,15 +59,21 @@ p <- ggplot(
     fill = "lightblue",
     alpha = 0.5
   ) +
-  geom_vline(aes(xintercept = mean(age[!is.na(age)])),
+  geom_vline(aes(xintercept = m),
     color = "red",
     linetype = "dashed",
     size = 0.9
   ) +
   xlim(10, 80) +
-  ylim(0, 4000) +
   labs(
-    title = "Número de usuarios por edad",
+    title = paste(
+      "Número de usuarios por edad en meses",
+      initial_month,
+      "a",
+      final_month,
+      "de",
+      yr
+    ),
     x = "Edad",
     y = "Número de usuarios"
   ) +
@@ -57,7 +82,7 @@ p <- ggplot(
     y = 3000,
     label = paste(
       "mean =",
-      round(m, 4)
+      m
     )
   )
 ggsave(paste(path_graphics, "edades_c.png", sep = ""),
