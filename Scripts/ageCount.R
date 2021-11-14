@@ -25,3 +25,4 @@ p <- ggplot(df, aes(edad)) +
   labs(title="Número de usuarios por edad",x="Edad", y = "Número de usuarios") +
   annotate("text", x = m+10, y = 3000, label = paste("mean =", m))
 ggsave("../Graphics/edades.png")
+
