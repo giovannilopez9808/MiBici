@@ -28,19 +28,22 @@ def plot(stations_data: DataFrame, data: DataFrame, column: str, path: str, grap
     plt.subplots(figsize=(9, 4))
     # Si se quiere analizar la zona de interes
     if(limits):
-        data = filter_data(data, column)
+        # data = filter_data(data, column)
         plt.xlim(170*4, 340*4)
         plt.ylim(150*4, 280*4)
     plt.axis("off")
     # Realiza el ploeto de los puntos con su color dependiento de su porcentaje de uso
     points = plt.scatter(stations_data["longitude"][data.index],
                          stations_data["latitude"][data.index],
-                         alpha=0.8,
+                         alpha=0.85,
+                         s=10,
                          c=data[column],
                          cmap=cmap)
     #  Impresion de los mapas
     plt.imshow(map.img,
-               origin="lower")
+               origin="lower",
+               vmin=0,
+               vmax=1)
     # Impresion del colorbar
     plt.colorbar(points,
                  ticks=np.arange(0.1,
@@ -84,7 +87,7 @@ stations_data = transform_coordinates_to_pixel_location(map,
 count_data = normalize_data(count_data,
                             parameters["count columns"])
 # Definicion del colormap
-cmap = cm.get_cmap('inferno', 9)
+cmap = cm.get_cmap('inferno', 10)
 for column in parameters["count columns"]:
     # Nombre de la grafica sin zoom
     graphic_name = "repetition_{}.png".format(

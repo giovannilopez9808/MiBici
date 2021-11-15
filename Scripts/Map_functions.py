@@ -23,7 +23,7 @@ class Map_class:
         # Reflexion vertical
         self.img = np.flipud(img)
 
-    def obtain_map_pixel(self) -> list(int):
+    def obtain_map_pixel(self) -> list:
         return [len(self.img), len(self.img[1])]
 
 
