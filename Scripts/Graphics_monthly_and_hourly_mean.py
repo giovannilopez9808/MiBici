@@ -26,6 +26,7 @@ plt.xticks(xticks,
            xlabels)
 plt.yticks(yticks,
            ylabels)
+plt.xlabel("Hora local (h)")
 plt.grid(ls="--",
          color="#ffffff",
          alpha=0.5,
@@ -35,8 +36,8 @@ plt.imshow(data_mean,
            cmap=cmap,
            vmin=0,
            vmax=80,
-           interpolation='spline36',
            aspect="auto")
 plt.colorbar(ticks=np.linspace(0, 80, 9))
 plt.tight_layout()
-plt.show()
+plt.savefig("../Graphics/monthly_and_hourly.png",
+            dpi=400)

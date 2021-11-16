@@ -11,7 +11,10 @@ data = format_data(data)
 # Calculo del promedio mensual
 data = data.resample("MS").mean()
 plt.subplots(figsize=(9, 3))
+plt.xlabel("Años")
+plt.ylabel("Número de usuarios")
 # Ploteo de los datos
 plt.scatter(data.index, data["Count"])
 plt.tight_layout()
-plt.show()
+plt.savefig("../Graphics/monthly_mean.png",
+            dpi=400)

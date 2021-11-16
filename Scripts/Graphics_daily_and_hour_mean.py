@@ -38,11 +38,12 @@ xlabels = [int(xlabel) for xlabel in xlabels]
 data_mean = data_mean.drop(columns=[str(i) for i in range(6)])
 data_mean = data_mean.drop(columns="23")
 data_mean = np.array(data_mean)
-cmap = cm.get_cmap('Greens', 9)
+cmap = cm.get_cmap('Greens', 10)
 plt.xticks(xticks,
            xlabels)
 plt.yticks(yticks,
            parameters["days"])
+plt.xlabel("Hora local (h)")
 plt.grid(ls="--",
          color="#000000",
          alpha=0.5,
@@ -58,4 +59,5 @@ plt.imshow(data_mean,
 #              cmap="Greens")
 plt.tight_layout()
 plt.colorbar(ticks=np.linspace(0, 100, 11))
-plt.show()
+plt.savefig("../Graphics/daily_and_hour_mean.png",
+            dpi=400)
