@@ -53,7 +53,7 @@ p <- ggplot(
   aes(edad)
 ) +
   geom_histogram(
-    bins = 20,
+    bins = 70,
     aes(y = ..count..),
     colour = "black",
     fill = "lightblue",
