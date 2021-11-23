@@ -8,7 +8,6 @@ fill_distance <- function(data, header, id_list, distance_data) {
         index <- as.integer(index)
         origen_id <- data$Origen_Id[index]
         destino_id <- data$Destino_Id[index]
-        print(c(origen_id, destino_id))
         origen_id <- paste("X", origen_id, sep = "")
         origen_id <- match(origen_id, header)
         destino_id <- match(destino_id, id_list)
