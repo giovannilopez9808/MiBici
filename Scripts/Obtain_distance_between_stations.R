@@ -22,7 +22,12 @@ parameters["file output"] <- paste(
 stations_data <- read.csv(parameters[["file information"]])
 rownames(stations_data) <- stations_data$id
 ndata <- nrow(stations_data)
-stations_distance <- data.frame(matrix(0, nrow = ndata + 1, ncol = ndata + 1))
+stations_distance <- data.frame(
+    matrix(0,
+        nrow = ndata + 1,
+        ncol = ndata + 1
+    )
+)
 for (index_i in 1:ndata) {
     id <- stations_data[index_i, 1]
     stations_distance[1, index_i + 1] <- id
