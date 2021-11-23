@@ -37,5 +37,27 @@ year_month_from_filename <- function(filename) {
 obtain_dates_consecutive <- function(files) {
     period <- period_from_filenames(files)
     dates <- seq(period[1], period[2], by = "days")
+    dates <- as.Date(dates)
     return(dates)
+}
+
+search_stations_without_info <- function(id) {
+    id_min <- min(id)
+    id_max <- max(id)
+    id_list <- c()
+    for (id in id_min:id_max) {
+        if (!id %in% id) {
+            id_list <- append(id_list, id)
+        }
+    }
+    return(id_list)
+}
+
+clean_data <- function(data, id_list) {
+    id_drop <- search_stations_without_info(id_list)
+    for (id in id_drop) {
+        data <- subset(data, Origen_Id != id)
+        data <- subset(data, Destino_Id != id)
+    }
+    return(data)
 }
