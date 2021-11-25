@@ -88,7 +88,6 @@ for file in files:
                        distance_data.index)
     data = fill_distance_data(data,
                               distance_data)
-
     daily_data = data.resample("D").mean()
     for date in daily_data.index:
         index = date.date()
