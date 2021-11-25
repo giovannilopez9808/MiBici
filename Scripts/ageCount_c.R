@@ -1,34 +1,33 @@
 library(ggplot2)
 library(stringr)
+library(plyr)
+source("Functions.R")
 theme_set(theme_classic())
-dir <- getwd()
-path_data <- sub(
-  "Scripts",
-  "Data/",
-  dir
-)
-path_graphics <- sub(
-  "Scripts",
-  "Graphics/",
-  dir
-)
-yr <- 2019
-initial_month <- 3
-final_month <- 5
+path_data <- "../Data/"
+path_output <- "../Output/"
+path_graphics <- "../Graphics/"
+files <- list.files(path_data)
 dframe <- data.frame(Usuario_Id = c(), age = c())
-
-for (month in initial_month:final_month) {
-  filename <- str_pad(month, 2, pad = "0")
-  filename <- paste(yr, "_", filename, ".csv", sep = "")
-  print(filename)
-  data <- read.csv(paste(path_data, filename, sep = ""))
+for (filename in files) {
+  message(paste(
+    "Analizando archivo",
+    filename
+  ))
+  data <- read.csv(paste(path_data,
+    filename,
+    sep = ""
+  ))
+  year <- as.integer(substring(filename, 1, 4))
   # Usuarios unicos
   usrs <- unique(data["Usuario_Id"])
-  age <- yr - data[
+  age <- year - data[
     as.numeric(row.names(unique(data["Usuario_Id"]))),
     "Año_de_nacimiento"
   ]
-  dff <- data.frame(usrs, age)
+  dff <- data.frame(
+    usrs,
+    age
+  )
   rm(data)
   rm(usrs)
   tmp <- dframe
@@ -43,6 +42,20 @@ age <- unlist(dframe[
   !is.na(dframe["age"]),
   "age"
 ])
+frecuency <- count(age, "age")
+colnames(frecuency) <- c(
+  "Age",
+  "Frecuency"
+)
+write.table(frecuency,
+  paste(path_output,
+    "Age_frecuency.csv",
+    sep = ""
+  ),
+  sep = ",",
+  quote = FALSE,
+  row.names = FALSE
+)
 rm(dframe)
 # media
 mu <- mean(age)
@@ -67,27 +80,25 @@ p <- ggplot(
   xlim(10, 80) +
   labs(
     title = paste(
-      "Número de usuarios por edad en meses",
-      initial_month,
-      "a",
-      final_month,
-      "de",
-      yr
+      "Número de usuarios"
     ),
     x = "Edad",
     y = "Número de usuarios"
-  ) +
-  annotate("text",
-    x = mu + 10,
-    y = 3000,
-    label = paste(
-      "mean =",
-      round(mu, 4)
-    )
-  )
-ggsave(paste(path_graphics, "edades_c.png", sep = ""),
-  height = 2043,
-  width = 2793,
-  limitsize = FALSE,
-  units = "px"
+  ) #+
+# annotate("text",
+#   x = mu + 10,
+#   y = max(df),
+#   label = paste(
+#     "mean =",
+#     round(mu, 4)
+#   )
+# )
+ggsave(paste(path_graphics,
+  "edades_c.png",
+  sep = ""
+),
+height = 2043,
+width = 2793,
+limitsize = FALSE,
+units = "px"
 )
