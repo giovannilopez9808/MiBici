@@ -16,5 +16,5 @@ plt.ylabel("Número de usuarios")
 # Ploteo de los datos
 plt.scatter(data.index, data["Count"])
 plt.tight_layout()
-plt.savefig("../Graphics/monthly_mean.png",
+plt.savefig("../Graphics/monthly_mean_count.png",
             dpi=400)

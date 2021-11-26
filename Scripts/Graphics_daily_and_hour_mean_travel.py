@@ -59,5 +59,5 @@ plt.imshow(data_mean,
 #              cmap="Greens")
 plt.tight_layout()
 plt.colorbar(ticks=np.linspace(0, 100, 11))
-plt.savefig("../Graphics/daily_and_hour_mean.png",
+plt.savefig("../Graphics/daily_and_hour_mean_travel.png",
             dpi=400)

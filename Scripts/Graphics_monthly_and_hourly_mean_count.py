@@ -39,5 +39,5 @@ plt.imshow(data_mean,
            aspect="auto")
 plt.colorbar(ticks=np.linspace(0, 80, 9))
 plt.tight_layout()
-plt.savefig("../Graphics/monthly_and_hourly.png",
+plt.savefig("../Graphics/monthly_and_hourly_mean_count.png",
             dpi=400)
