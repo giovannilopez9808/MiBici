@@ -17,15 +17,6 @@ def format_data(data: DataFrame, columns: list) -> DataFrame:
     return data
 
 
-def fill_time_data(data: DataFrame) -> DataFrame:
-    data["Inicio_del_viaje"] = pd.to_datetime(data["Inicio_del_viaje"])
-    data["Fin_del_viaje"] = pd.to_datetime(data["Fin_del_viaje"])
-    data["Time"] = data["Fin_del_viaje"]-data["Inicio_del_viaje"]
-    data["Minutes"] = data["Time"].apply(lambda x: x.total_seconds()/60)
-    data = data.drop(columns="Time")
-    return data
-
-
 parameters = {"path output": "../Output/",
               "path data": "../Data/",
               "file output": "Daily_mean_time_travel.csv",
@@ -36,7 +27,6 @@ parameters = {"path output": "../Output/",
                                   "Destino_Id",
                                   "Año_de_nacimiento"]
               }
-
 files = obtain_filenames(parameters["path data"])
 period = obtain_period_from_filenames(files)
 dates = obtain_consecutive_dates_from_period(period)
@@ -49,7 +39,7 @@ for file in files:
                      file)
     data = format_data(data,
                        parameters["useless columns"])
-    data = fill_time_data(data)
+    data = obtain_travel_time(data)
     daily_data = data.resample("D").mean()
     for date in daily_data.index:
         index = date.date()

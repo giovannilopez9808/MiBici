@@ -137,3 +137,12 @@ def obtain_distance_bewteen_points(lat1: float, lon1: float, lat2: float, lon2: 
 
 def obtain_filenames(path: str) -> list:
     return sorted(os.listdir(path))
+
+
+def obtain_travel_time(data: DataFrame) -> DataFrame:
+    data["Inicio_del_viaje"] = pd.to_datetime(data["Inicio_del_viaje"])
+    data["Fin_del_viaje"] = pd.to_datetime(data["Fin_del_viaje"])
+    data["Time"] = data["Fin_del_viaje"]-data["Inicio_del_viaje"]
+    data["Minutes"] = data["Time"].apply(lambda x: x.total_seconds()/60)
+    data = data.drop(columns="Time")
+    return data

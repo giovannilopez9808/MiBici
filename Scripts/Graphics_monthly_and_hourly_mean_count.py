@@ -3,7 +3,7 @@ from Functions import *
 from pylab import *
 
 parameters = {"path data": "../Output/",
-              "file data": "Hourly_count.csv"}
+              "file data": "Hourly_count_travel.csv"}
 
 data = read_data(parameters["path data"],
                  parameters["file data"])

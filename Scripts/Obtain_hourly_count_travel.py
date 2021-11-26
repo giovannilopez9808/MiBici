@@ -18,7 +18,7 @@ def format_data(data: DataFrame, columns: list, date_column: str) -> DataFrame:
 
 parameters = {"path data": "../Data/",
               "path output": "../Output/",
-              "file output": "Hourly_count.csv",
+              "file output": "Hourly_count_travel.csv",
               "useless columns": ["Usuario_Id",
                                   "Genero",
                                   "Viaje_Id",

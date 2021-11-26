@@ -35,4 +35,5 @@ for file in files:
         # Guardado del conteo
         daily_count["Count"][index.date()] = date
 # Impresion de los resultados
-daily_count.to_csv("{}Daily_count.csv".format(parameters["path output"]))
+daily_count.to_csv("{}Daily_count_travel.csv".format(
+    parameters["path output"]))
