@@ -27,6 +27,7 @@ for file in files:
     data.index = pd.to_datetime(data["Inicio_del_viaje"])
     # Eliminacion de las columnas que no seran usadas
     data = data.drop(columns=parameters["useless columns"])
+    data = data.drop_duplicates()
     # Calcula el conteo diario de los viajes
     data = data.resample("D").count()
     for index in data.index:
