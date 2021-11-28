@@ -139,15 +139,6 @@ def obtain_filenames(path: str) -> list:
     return sorted(os.listdir(path))
 
 
-def obtain_travel_time(data: DataFrame) -> DataFrame:
-    data["Inicio_del_viaje"] = pd.to_datetime(data["Inicio_del_viaje"])
-    data["Fin_del_viaje"] = pd.to_datetime(data["Fin_del_viaje"])
-    data["Time"] = data["Fin_del_viaje"]-data["Inicio_del_viaje"]
-    data["Minutes"] = data["Time"].apply(lambda x: x.total_seconds()/60)
-    data = data.drop(columns="Time")
-    return data
-
-
 def create_hourly_dataframe(index: list) -> DataFrame:
     hours = [hour for hour in range(24)]
     data = pd.DataFrame(index=index,
@@ -207,3 +198,30 @@ class distance_algorithm:
                 distance = distance_data[str(index_i)][index_j]
                 self.data.loc[index, "Distance"] = distance
         self.data = self.data.drop(columns=["Origen_Id", "Destino_Id", "diff"])
+
+
+class time_algorithm:
+    def __init__(self, data: DataFrame, columns: list) -> None:
+        self.data = data
+        self.format_data(columns)
+        self.obtain_travel_time()
+
+    def obtain_travel_time(self) -> None:
+        self.data["Inicio_del_viaje"] = pd.to_datetime(
+            self.data["Inicio_del_viaje"])
+        self.data["Fin_del_viaje"] = pd.to_datetime(self.data["Fin_del_viaje"])
+        self.data["Time"] = self.data["Fin_del_viaje"] - \
+            self.data["Inicio_del_viaje"]
+        self.data["Minutes"] = self.data["Time"].apply(
+            lambda x: x.total_seconds()/60)
+        self.data = self.data.drop(columns="Time")
+
+    def clean_useless_data(self, columns: list) -> None:
+        self.data = self.data.drop(columns=columns)
+
+    def format_data(self, columns: list) -> None:
+        self.data["diff"] = self.data["Origen_Id"]-self.data["Destino_Id"]
+        self.data["Distance"] = 0.0
+        self.data.index = pd.to_datetime(self.data["Inicio_del_viaje"])
+        self.clean_useless_data(columns)
+        self.data = self.data.drop_duplicates()

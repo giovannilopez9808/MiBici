@@ -1,20 +1,4 @@
 from Functions import *
-pd.options.mode.chained_assignment = None
-
-
-def clean_useless_data(data: DataFrame, columns: list) -> DataFrame:
-    data = data.drop(columns=columns)
-    # data = data[data["diff"] != 0]
-    return data
-
-
-def format_data(data: DataFrame, columns: list) -> DataFrame:
-    data["diff"] = data["Origen_Id"]-data["Destino_Id"]
-    data["Distance"] = 0.0
-    data.index = pd.to_datetime(data["Inicio_del_viaje"])
-    data = clean_useless_data(data, columns)
-    data = data.drop_duplicates()
-    return data
 
 
 parameters = {"path output": "../Output/",
@@ -37,13 +21,15 @@ for file in files:
     print("Analizando archivo {}".format(file))
     data = read_data(parameters["path data"],
                      file)
-    data = format_data(data,
-                       parameters["useless columns"])
-    data = obtain_travel_time(data)
+    times = time_algorithm(data,
+                           parameters["useless columns"])
+    data = times.data
     daily_data = data.resample("D").mean()
+    del data, times
     for date in daily_data.index:
         index = date.date()
         value = daily_data["Minutes"][date]
         daily_data_output.loc[index, "Time"] = value
+    del daily_data
 daily_data_output.to_csv("{}{}".format(parameters["path output"],
                                        parameters["file output"]))
