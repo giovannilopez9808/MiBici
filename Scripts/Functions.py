@@ -148,22 +148,54 @@ def obtain_travel_time(data: DataFrame) -> DataFrame:
     return data
 
 
-def fill_distance_data(data: DataFrame, distance_data: DataFrame) -> DataFrame:
-    for index in data.index:
-        index_list_i = np.array(data["Origen_Id"][index])
-        index_list_j = np.array(data["Destino_Id"][index])
-        size = np.size(index_list_i)
-        if size > 1:
-            distance = 0
-            for pos in range(size):
-                index_i = index_list_i[pos]
-                index_j = index_list_j[pos]
-                distance += distance_data[str(index_i)][index_j]
-            data.loc[index, "Distance"] = distance / size
-        else:
-            index_i = index_list_i
-            index_j = index_list_j
-            distance = distance_data[str(index_i)][index_j]
-            data.loc[index, "Distance"] = distance
-    data = data.drop(columns=["Origen_Id", "Destino_Id", "diff"])
-    return data
+class distance_algorithm:
+    def __init__(self, data: DataFrame, columns: list, distance_data: DataFrame, stations: list) -> None:
+        self.data = data
+        self.format_data(columns)
+        self.filter_data(stations)
+        self.fill_distance_data(distance_data)
+
+    def clean_useless_data(self,  columns: list) -> None:
+        self.data = self.data.drop(columns=columns)
+        self.data = self.data[self.data["diff"] != 0]
+
+    def format_data(self, columns: list) -> None:
+        self.data["diff"] = self.data["Origen_Id"]-self.data["Destino_Id"]
+        self.data["Distance"] = 0.0
+        self.data.index = pd.to_datetime(self.data["Inicio_del_viaje"])
+        self.clean_useless_data(columns)
+        self.data = self.data.drop_duplicates()
+
+    def filter_data(self,  stations: list) -> None:
+        stations = list(stations)
+        labels = ["Origen_Id", "Destino_Id"]
+        for index in self.data.index:
+            labels_id_i = np.array(self.data[labels[0]][index])
+            labels_id_j = np.array(self.data[labels[1]][index])
+            size = np.size(labels_id_i)
+            if size > 1:
+                for i in range(size):
+                    if (not(labels_id_i[i] in stations) or not(labels_id_j[i] in stations)):
+                        self.data = self.data.drop(index)
+            else:
+                if (not(labels_id_i in stations) or not(labels_id_j in stations)):
+                    self.data = self.data.drop(index)
+
+    def fill_distance_data(self, distance_data: DataFrame) -> None:
+        for index in self.data.index:
+            index_list_i = np.array(self.data["Origen_Id"][index])
+            index_list_j = np.array(self.data["Destino_Id"][index])
+            size = np.size(index_list_i)
+            if size > 1:
+                distance = 0
+                for pos in range(size):
+                    index_i = index_list_i[pos]
+                    index_j = index_list_j[pos]
+                    distance += distance_data[str(index_i)][index_j]
+                self.data.loc[index, "Distance"] = distance / size
+            else:
+                index_i = index_list_i
+                index_j = index_list_j
+                distance = distance_data[str(index_i)][index_j]
+                self.data.loc[index, "Distance"] = distance
+        self.data = self.data.drop(columns=["Origen_Id", "Destino_Id", "diff"])
