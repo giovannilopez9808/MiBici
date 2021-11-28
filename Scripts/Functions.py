@@ -146,3 +146,24 @@ def obtain_travel_time(data: DataFrame) -> DataFrame:
     data["Minutes"] = data["Time"].apply(lambda x: x.total_seconds()/60)
     data = data.drop(columns="Time")
     return data
+
+
+def fill_distance_data(data: DataFrame, distance_data: DataFrame) -> DataFrame:
+    for index in data.index:
+        index_list_i = np.array(data["Origen_Id"][index])
+        index_list_j = np.array(data["Destino_Id"][index])
+        size = np.size(index_list_i)
+        if size > 1:
+            distance = 0
+            for pos in range(size):
+                index_i = index_list_i[pos]
+                index_j = index_list_j[pos]
+                distance += distance_data[str(index_i)][index_j]
+            data.loc[index, "Distance"] = distance / size
+        else:
+            index_i = index_list_i
+            index_j = index_list_j
+            distance = distance_data[str(index_i)][index_j]
+            data.loc[index, "Distance"] = distance
+    data = data.drop(columns=["Origen_Id", "Destino_Id", "diff"])
+    return data
