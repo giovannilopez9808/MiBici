@@ -1,35 +1,6 @@
 from Functions import *
 
 
-def create_hourly_dataframe(index: list) -> DataFrame:
-    hours = [hour for hour in range(24)]
-    data = pd.DataFrame(index=index,
-                        columns=hours)
-    data = data.fillna(0.0)
-    return data
-
-
-def time_format(data: DataFrame, date_column: str) -> DataFrame:
-    data.index = pd.to_datetime(data[date_column])
-    data = data.drop(columns=date_column)
-    return data
-
-
-def clean_useless_data(data: DataFrame, columns: list) -> DataFrame:
-    data = data.drop(columns=columns)
-    data = data[data["diff"] != 0]
-    return data
-
-
-def format_data(data: DataFrame, columns: list) -> DataFrame:
-    data["diff"] = data["Origen_Id"]-data["Destino_Id"]
-    data["Distance"] = 0.0
-    data.index = pd.to_datetime(data["Inicio_del_viaje"])
-    data = clean_useless_data(data, columns)
-    data = data.drop_duplicates()
-    return data
-
-
 parameters = {"path data": "../Data/",
               "path output": "../Output/",
               "file output": "Hourly_mean_distance.csv",

@@ -1,14 +1,6 @@
 from Functions import *
 
 
-def create_hourly_dataframe(index: list) -> DataFrame:
-    hours = [hour for hour in range(24)]
-    data = pd.DataFrame(index=index,
-                        columns=hours)
-    data = data.fillna(0.0)
-    return data
-
-
 def time_format(data: DataFrame, date_column: str) -> DataFrame:
     data.index = pd.to_datetime(data[date_column])
     data = data.drop(columns=date_column)
@@ -45,11 +37,13 @@ for file in files:
     data = time_format(data,
                        "Inicio_del_viaje")
     hourly_data = data.resample("H").mean()
+    del data
     for index in hourly_data.index:
         value = hourly_data["Minutes"][index]
         hour = index.time().hour
         date = index.date()
-        hourly_count_origin[hour][date] = value
+        hourly_count_origin.loc[date, hour] = value
+    del hourly_data
 hourly_count_origin.index.names = ["Date"]
 hourly_count_origin.to_csv("{}{}".format(parameters["path output"],
                                          parameters["file output"]))
