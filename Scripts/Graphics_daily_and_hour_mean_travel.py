@@ -15,6 +15,8 @@ def set_day_of_the_week(data: DataFrame, parameters: dict) -> DataFrame:
 
 parameters = {"path data": "../Output/",
               "file data": "Hourly_count_travel.csv",
+              "path graphics": "../Graphics/",
+              "file graphics": "daily_and_hour_mean.png",
               "days": {"lunes": "1",
                        "martes": "2",
                        "miércoles": "3",
@@ -41,13 +43,21 @@ data_mean = np.array(data_mean)
 cmap = cm.get_cmap('Greens', 10)
 plt.xticks(xticks,
            xlabels)
-plt.yticks(yticks,
+plt.yticks(yticks+0.5,
            parameters["days"])
 plt.xlabel("Hora local (h)")
 plt.grid(ls="--",
          color="#000000",
          alpha=0.5,
-         lw=1.5)
+         lw=1.5,
+         axis="x")
+for ytick in yticks:
+    plt.plot([xticks[0], 16.5],
+             [ytick, ytick],
+             ls="--",
+             color="#000000",
+             alpha=0.5,
+             lw=1.5)
 plt.imshow(data_mean,
            origin="lower",
            cmap=cmap,
@@ -56,5 +66,6 @@ plt.imshow(data_mean,
            aspect='auto')
 plt.tight_layout()
 plt.colorbar(ticks=np.linspace(0, 100, 11))
-plt.savefig("../Graphics/daily_and_hour_mean_travel.png",
+plt.savefig("{}{}".format(parameters["path graphics"],
+                          parameters["file graphics"]),
             dpi=400)
