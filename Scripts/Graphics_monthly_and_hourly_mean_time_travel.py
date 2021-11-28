@@ -3,7 +3,9 @@ from Functions import *
 from pylab import *
 
 parameters = {"path data": "../Output/",
-              "file data": "Hourly_mean_time_travel.csv"}
+              "file data": "Hourly_mean_time_travel.csv",
+              "path graphics": "../Graphics/",
+              "file graphics": "monthly_hourly_mean_time_travel.png"}
 
 data = read_data(parameters["path data"],
                  parameters["file data"])
@@ -45,8 +47,11 @@ for ytick in yticks:
              color="#ffffff",
              alpha=0.5,
              lw=1.5)
-plt.colorbar(ticks=np.linspace(0, 100, 11))
+cbar = plt.colorbar(ticks=np.linspace(0, 100, 11))
+cbar.set_label("Tiempo promedio por viaje (min)",
+               rotation=-90,
+               labelpad=15)
 plt.tight_layout()
-plt.show()
-# plt.savefig("../Graphics/monthly_and_hourly.png",
-#             dpi=400)
+plt.savefig("{}{}".format(parameters["path graphics"],
+                          parameters["file graphics"]),
+            dpi=400)
