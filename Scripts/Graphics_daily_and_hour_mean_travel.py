@@ -54,9 +54,6 @@ plt.imshow(data_mean,
            vmin=0,
            vmax=100,
            aspect='auto')
-# plt.contourf(data_mean,
-#              origin="lower",
-#              cmap="Greens")
 plt.tight_layout()
 plt.colorbar(ticks=np.linspace(0, 100, 11))
 plt.savefig("../Graphics/daily_and_hour_mean_travel.png",

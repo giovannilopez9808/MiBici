@@ -2,7 +2,7 @@ library(ggplot2)
 path_data <- "../Output/"
 file_data <- "Age_frecuency.csv"
 path_graphics <- "../Graphics/"
-file_graphic <- "output.png"
+file_graphic <- "edades.png"
 mu <- 33.62
 data <- read.csv(paste(path_data,
     file_data,
