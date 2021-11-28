@@ -8,7 +8,6 @@ data <- read.csv(paste(path_data,
     file_data,
     sep = ""
 ))
-theme_set(theme_classic())
 ggplot(
     data = data,
     aes(x = Age, y = Frecuency)
@@ -30,13 +29,25 @@ ggplot(
         x = "Edad",
         y = "Número de usuarios"
     ) +
-    scale_y_continuous(breaks = seq(0, 3300, 200)) +
+    scale_y_continuous(
+        breaks = seq(0, 3200, 200),
+    ) +
     scale_x_continuous(
-        breaks = seq(16, 80, 4),
+        breaks = seq(16, 80, 2),
         limits = c(16, 80)
     ) +
+    theme(
+        panel.background = element_rect(
+            fill = "white",
+            colour = "black"
+        ),
+        panel.grid.major = element_line(
+            colour = "black",
+            linetype = "dashed"
+        )
+    ) +
     annotate("text",
-        x = mu + 16,
+        x = mu + 8,
         y = 3300,
         label = paste(
             "mean =",
