@@ -21,16 +21,19 @@ for file in files:
     print("Analizando archivo {}".format(file))
     data = read_data(parameters["path data"],
                      file)
-    data = format_data(data,
-                       parameters["useless columns"])
-    data = fill_distance_data(data,
-                              distance_data)
+    distances = distance_algorithm(data,
+                                   parameters["useless columns"],
+                                   distance_data,
+                                   distance_data.index)
+    data = distances.data
     hourly_data = data.resample("H").mean()
+    del data, distances
     for index in hourly_data.index:
         value = hourly_data["Distance"][index]
         hour = index.time().hour
         date = index.date()
         hourly_count_origin.loc[date, hour] = value
+    del hourly_data
 hourly_count_origin.index.names = ["Date"]
 hourly_count_origin.to_csv("{}{}".format(parameters["path output"],
                                          parameters["file output"]))
