@@ -3,9 +3,9 @@ from Functions import *
 from pylab import *
 
 parameters = {"path data": "../Output/",
-              "file data": "Hourly_mean_time_travel.csv",
+              "file data": "Hourly_mean_distance.csv",
               "path graphics": "../Graphics/",
-              "file graphics": "monthly_hourly_mean_time_travel.png"}
+              "file graphics": "monthly_hourly_mean_distance.png"}
 
 data = read_data(parameters["path data"],
                  parameters["file data"])
