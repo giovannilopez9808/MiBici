@@ -4,7 +4,7 @@ pd.options.mode.chained_assignment = None
 
 def clean_useless_data(data: DataFrame, columns: list) -> DataFrame:
     data = data.drop(columns=columns)
-    data = data[data["diff"] != 0]
+    # data = data[data["diff"] != 0]
     return data
 
 
