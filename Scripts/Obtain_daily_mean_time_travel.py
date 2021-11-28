@@ -44,6 +44,6 @@ for file in files:
     for date in daily_data.index:
         index = date.date()
         value = daily_data["Minutes"][date]
-        daily_data_output["Time"][index] = value
+        daily_data_output.loc[index, "Time"] = value
 daily_data_output.to_csv("{}{}".format(parameters["path output"],
                                        parameters["file output"]))
