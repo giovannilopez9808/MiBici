@@ -148,6 +148,14 @@ def obtain_travel_time(data: DataFrame) -> DataFrame:
     return data
 
 
+def create_hourly_dataframe(index: list) -> DataFrame:
+    hours = [hour for hour in range(24)]
+    data = pd.DataFrame(index=index,
+                        columns=hours)
+    data = data.fillna(0.0)
+    return data
+
+
 class distance_algorithm:
     def __init__(self, data: DataFrame, columns: list, distance_data: DataFrame, stations: list) -> None:
         self.data = data
