@@ -68,9 +68,9 @@ plt.imshow(data_mean,
            aspect='auto')
 plt.tight_layout()
 cbar = plt.colorbar(ticks=np.round(np.linspace(1.2, 1.6, 9), 2))
-cbar.set_label("Promedio de viajes",
+cbar.set_label("Promedio de distancia recorrida (km)",
                rotation=-90,
-               labelpad=8)
+               labelpad=15)
 plt.savefig("{}{}".format(parameters["path graphics"],
                           parameters["file graphics"]),
             dpi=400)
