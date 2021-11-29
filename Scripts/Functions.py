@@ -153,6 +153,7 @@ class distance_algorithm:
         self.format_data(columns)
         self.filter_data(stations)
         self.fill_distance_data(distance_data)
+        self.data.index = pd.to_datetime(self.data["Inicio_del_viaje"])
 
     def clean_useless_data(self,  columns: list) -> None:
         self.data = self.data.drop(columns=columns)
@@ -161,7 +162,6 @@ class distance_algorithm:
     def format_data(self, columns: list) -> None:
         self.data["diff"] = self.data["Origen_Id"]-self.data["Destino_Id"]
         self.data["Distance"] = 0.0
-        self.data.index = pd.to_datetime(self.data["Inicio_del_viaje"])
         self.clean_useless_data(columns)
         self.data = self.data.drop_duplicates()
 
@@ -175,7 +175,7 @@ class distance_algorithm:
             if size > 1:
                 for i in range(size):
                     if (not(labels_id_i[i] in stations) or not(labels_id_j[i] in stations)):
-                        self.data = self.data.drop(index)
+                        self.data = self.data.drop()
             else:
                 if (not(labels_id_i in stations) or not(labels_id_j in stations)):
                     self.data = self.data.drop(index)

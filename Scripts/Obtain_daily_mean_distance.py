@@ -8,9 +8,7 @@ parameters = {"path output": "../Output/",
               "useless columns": ["Usuario_Id",
                                   "Genero",
                                   "Viaje_Id",
-                                  "Año_de_nacimiento",
-                                  "Inicio_del_viaje",
-                                  "Fin_del_viaje"]
+                                  "Año_de_nacimiento"]
               }
 
 files = obtain_filenames(parameters["path data"])
