@@ -11,8 +11,7 @@ mes_final <- 12
 meses <- c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
            "Julio","Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
 
-f_dframe <- data.frame(Usuario_Id=c(), age=c())
-m_dframe <- data.frame(Usuario_Id=c(), age=c())
+dframe <- data.frame(Usuario_Id=c(), age=c(), gender=c())
 
 # Multiples archivos
 for(yr in yr_in:yr_f) {
@@ -25,61 +24,42 @@ for(yr in yr_in:yr_f) {
    data <- read.csv(file)
    # Datos para usuarios unicos
    usrs <- data[as.numeric(row.names(unique(data["Usuario_Id"]))), ]
-   f_usrs <- usrs[usrs$Genero == "F",]
-   m_usrs <- usrs[usrs$Genero == "M",]
-   rm(usrs)
    
-   f_age <- yr - f_usrs["Año_de_nacimiento"]
-   m_age <- yr - m_usrs["Año_de_nacimiento"]
-   
-   f_df <- data.frame(f_usrs$Usuario_Id, f_age)
-   m_df <- data.frame(m_usrs$Usuario_Id, m_age)
-   
+   df <- data.frame(usrs$Usuario_Id, yr - usrs["Año_de_nacimiento"], usrs$Genero)
+    
    rm(data)
-   rm(f_usrs)
-   rm(m_usrs)
+   rm(usrs)
    #Femenino
-   tmp <- f_dframe
+   tmp <- dframe
    # union de datos previos y nuevos
-   f_dframe <- unique(rbind(tmp, f_df))
+   dframe <- unique(rbind(tmp, df))
    
-   rm(f_df)
-   #Masculino
-   tmp <- m_dframe
-   # union de datos previos y nuevos
-   m_dframe <- unique(rbind(tmp, m_df))
-   
-   rm(m_df) 
+   rm(df) 
    rm(tmp)
    
   }
 }
-rm(f_age)
-rm(m_age)
-colnames(f_dframe) <- c("Usuario_Id", "Edad")
-colnames(m_dframe) <- c("Usuario_Id", "Edad")
+colnames(dframe) <- c("Usuario_Id", "Edad", "Genero")
+dframe <- dframe[!is.na(dframe["Edad"]),]
+dframe <- dframe[dframe$Genero=="M" | dframe$Genero =="F",]
 # Edades
-f_age <- unlist(f_dframe[!is.na(f_dframe["Edad"]), "Edad"])
-m_age <- unlist(m_dframe[!is.na(m_dframe["Edad"]), "Edad"])
+f_age <- unlist(dframe[dframe$Genero=="F", "Edad"])
+m_age <- unlist(dframe[dframe$Genero=="M", "Edad"])
 
-rm(f_dframe)
-rm(m_dframe)
 # media
 f_mean  <- mean(f_age)
 m_mean <- mean(m_age)
 # Graficacion con ggplot
-f_df <- data.frame(edad=f_age[!is.na(f_age)])
-m_df <- data.frame(edad=m_age[!is.na(m_age)])
-
-p <- ggplot() +
-  # M
-  geom_density(data=m_df, aes(edad, y=..count..), colour="black", fill="#a687c1", alpha=0.7)+
+rm(f_age)
+rm(m_age)
+p <- ggplot(dframe, aes(Edad, fill = Genero)) +
+  geom_density(aes(y=..count..),alpha=0.2)+
+  #M
   geom_vline(aes(xintercept=m_mean),
-             color="#a687c1", linetype="dashed", size=0.9) +
+             color="blue", linetype="dashed", size=0.9) +
   #F
-  geom_density(data=f_df, aes(edad, y=..count..), colour="black", fill="#87c1ad", alpha=0.7)+
   geom_vline(aes(xintercept=f_mean),
-              color="#87c190", linetype="dashed", size=0.9) +
+              color="red", linetype="dashed", size=0.9) +
   ##
   scale_y_continuous(
     breaks = seq(0, 3200, 200),
@@ -90,16 +70,16 @@ p <- ggplot() +
   ) +
   theme(
     panel.background = element_rect(
-      fill = "lightgray",
+      fill = "white",
       colour = "black"
     ),
     panel.grid.major = element_line(
-      colour = "white",
+      colour = "lightgray",
       linetype = "dashed"
     )
   ) +
-  annotate("text", x = f_mean+10, y = 1900, label = paste("F_mean =", f_mean)) +
-  annotate("text", x = m_mean+10, y = 1700, label = paste("M_mean =", m_mean)) +
+  annotate("text", x = f_mean+10, y = 1700, label = paste("F_mean =", f_mean)) +
+  annotate("text", x = m_mean+10, y = 1900, label = paste("M_mean =", m_mean)) +
   labs(title=paste("Número de usuarios por edad y género de",
                    meses[mes_inicial],yr_in, "a", 
                    meses[mes_final], yr_f),
@@ -107,3 +87,4 @@ p <- ggplot() +
        y = "Número de usuarios")
 
 ggsave("../Graphics/age_gender_plot.png")
+rm(dframe)
