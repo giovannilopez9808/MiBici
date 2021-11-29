@@ -14,7 +14,7 @@ data = format_data(data)
 # Calculo del promedio mensual
 monthly_mean = data.resample("MS").mean()
 yearly_mean = data.resample("Y").mean()
-data.to_csv("{}{}".format(parameters["path data"],
-                          parameters["file monthly output"]))
-data.to_csv("{}{}".format(parameters["path data"],
-                          parameters["file yearly output"]))
+monthly_mean.to_csv("{}{}".format(parameters["path data"],
+                                  parameters["file monthly output"]))
+yearly_mean.to_csv("{}{}".format(parameters["path data"],
+                                 parameters["file yearly output"]))
