@@ -2,6 +2,7 @@ from Functions import *
 
 parameters = {"path data": "../Data/",
               "path output": "../Output/",
+              "file output": "Daily_count_travel.csv",
               "useless columns": ["Usuario_Id",
                                   "Genero",
                                   "Año_de_nacimiento",
@@ -16,7 +17,8 @@ period = obtain_period_from_filenames(files)
 # Obtiene los dias consecutivos entre el periodo obtenido
 dates = obtain_consecutive_dates_from_period(period)
 # Creacion del dataframe que guardara los conteos de cada estacion
-daily_count = create_daily_dataframe(dates, "Count")
+daily_count = create_daily_dataframe(dates,
+                                     ["Count"])
 # Ciclo para variar entre los archivos
 for file in files:
     print("Analizando archivo {}".format(file))
@@ -29,12 +31,14 @@ for file in files:
     data = data.drop(columns=parameters["useless columns"])
     data = data.drop_duplicates()
     # Calcula el conteo diario de los viajes
-    data = data.resample("D").count()
-    for index in data.index:
-        # Obtiene la fecha del conteo
-        date = (data["Viaje_Id"][index])
+    daily_mean = data.resample("D").count()
+    del data
+    for index in daily_mean.index:
+        # Obtiene el valor de la fecha
+        value = daily_mean["Viaje_Id"][index]
         # Guardado del conteo
-        daily_count["Count"][index.date()] = date
+        daily_count.loc[index.date(), "Count"] = value
 # Impresion de los resultados
-daily_count.to_csv("{}Daily_count_travel.csv".format(
-    parameters["path output"]))
+daily_count.to_csv("{}{}".format(
+    parameters["path output"],
+    parameters["file output"]))
