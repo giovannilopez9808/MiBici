@@ -139,11 +139,14 @@ def obtain_filenames(path: str) -> list:
     return sorted(os.listdir(path))
 
 
-def create_hourly_dataframe(index: list) -> DataFrame:
+def create_hourly_dataframe(index: list, use_float=True) -> DataFrame:
     hours = [hour for hour in range(24)]
     data = pd.DataFrame(index=index,
                         columns=hours)
-    data = data.fillna(0.0)
+    if use_float:
+        data = data.fillna(0.0)
+    else:
+        data = data.fillna(0)
     return data
 
 
