@@ -92,12 +92,12 @@ def obtain_consecutive_dates_from_period(period: list) -> list:
     return dates
 
 
-def create_daily_dataframe(index: list, header: str, use_float=False) -> DataFrame:
+def create_daily_dataframe(index: list, header: list, use_float=False) -> DataFrame:
     """ 
     Crea un dataframe dado un indice y con una columna de titulo count
     """
     data = pd.DataFrame(index=index,
-                        columns=[header])
+                        columns=header)
     # Header del index, este aparecera al momento de guardar el documento
     data.index.names = ["Date"]
     # Inicializacion del conteo
