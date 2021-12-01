@@ -3,9 +3,9 @@ from Functions import *
 
 parameters = {"path data": "../Output/",
               "path graphics": "../Graphics/",
-              "file data": "Daily_mean_distance.csv",
-              "file monthly output": "Monthly_mean_distance.csv",
-              "file yearly output": "Yearly_mean_distance.csv"}
+              "file data": "Daily_distance.csv",
+              "file monthly output": "Monthly_distance.csv",
+              "file yearly output": "Yearly_distance.csv"}
 # Lectura de los datos
 data = pd.read_csv("{}{}".format(parameters["path data"],
                                  parameters["file data"]))
