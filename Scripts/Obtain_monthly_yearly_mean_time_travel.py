@@ -3,7 +3,7 @@ from Functions import *
 
 parameters = {"path data": "../Output/",
               "path graphics": "../Graphics/",
-              "file data": "Daily_mean_time_travel.csv",
+              "file data": "Daily_time_travel.csv",
               "file monthly output": "Monthly_mean_time_travel.csv",
               "file yearly output": "Yearly_mean_time_travel.csv"}
 # Lectura de los datos
