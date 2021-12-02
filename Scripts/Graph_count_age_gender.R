@@ -85,7 +85,8 @@ p <- ggplot(
             "Número de usuarios por edad y género en el periodo 2015-2018"
         ),
         x = "Edad",
-        y = "Número de usuarios"
+        y = "Número de usuarios",
+        colour = "Promedios"
     ) +
     scale_color_manual(values = colors)
 ggsave(paste(
