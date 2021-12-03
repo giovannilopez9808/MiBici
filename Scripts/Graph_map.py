@@ -29,7 +29,8 @@ plt.axis("off")
 plt.scatter(stations_data["longitude"],
             stations_data["latitude"],
             alpha=0.7,
-            c="#76c893")
+            c="#76c893",
+            s=10)
 # Plot del mapa
 plt.imshow(map.img,
            origin="lower")
