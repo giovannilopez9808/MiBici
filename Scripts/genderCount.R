@@ -48,6 +48,19 @@ p <- ggplot(dframe, aes(gen)) +
                    meses[mes_inicial],yr_in, "a", 
                    meses[mes_final], yr_f),
        x="Género", y = "Número de usuarios") +
+  scale_y_continuous(
+    breaks = seq(0, 36000, 2000),
+  ) +
+  theme(
+    panel.background = element_rect(
+      fill = "white",
+      colour = "black"
+    ),
+    panel.grid.major = element_line(
+      colour = "lightgray",
+      linetype = "dashed"
+    )
+  )+
   geom_text(aes(y = ((..count..)/sum(..count..)),
                 label = scales::percent((..count..)/sum(..count..))),
             stat = "count", 

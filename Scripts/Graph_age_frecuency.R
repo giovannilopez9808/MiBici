@@ -50,7 +50,7 @@ ggplot(
             colour = "black"
         ),
         panel.grid.major = element_line(
-            colour = "black",
+            colour = "lightgray",
             linetype = "dashed"
         )
     )
