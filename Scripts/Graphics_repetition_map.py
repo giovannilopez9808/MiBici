@@ -31,15 +31,15 @@ def plot(stations_data: DataFrame, data: DataFrame, column: str, path: str, grap
         title = "origen"
     plt.subplots(figsize=(9, 5))
     # Si se quiere analizar la zona de interes
-    scatter_size = 5
+    scatter_size = 15
     if(limits):
         # data = filter_data(data, column)
         plt.xlim(170*4, 340*4)
         plt.ylim(150*4, 280*4)
-        scatter_size = 20
+        scatter_size = 25
     plt.axis("off")
     # Realiza el ploeto de los puntos con su color dependiento de su porcentaje de uso
-    cmap = cm.get_cmap('cividis', 6)
+    cmap = cm.get_cmap('inferno', 6)
     points = plt.scatter(stations_data["longitude"][data.index],
                          stations_data["latitude"][data.index],
                          alpha=0.85,
