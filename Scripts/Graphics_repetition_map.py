@@ -25,22 +25,25 @@ def plot(stations_data: DataFrame, data: DataFrame, column: str, path: str, grap
     """ 
     Realiza el ploteo del uso de las estaciones en un mapa, si se quiere realzar un zoom en la zona de interes debera dar un True en la variable limits.
     """
+    title = "destino"
+    tick_max = np.round(np.max(data[column]), 3)
+    if "origen" in graphic_name:
+        title = "origen"
     plt.subplots(figsize=(9, 5))
     # Si se quiere analizar la zona de interes
+    scatter_size = 5
     if(limits):
         # data = filter_data(data, column)
         plt.xlim(170*4, 340*4)
         plt.ylim(150*4, 280*4)
+        scatter_size = 20
     plt.axis("off")
     # Realiza el ploeto de los puntos con su color dependiento de su porcentaje de uso
-    cmap = cm.get_cmap('inferno', 6)
-    s = 5
-    if "zoom" in graphic_name:
-        s = 20
+    cmap = cm.get_cmap('cividis', 6)
     points = plt.scatter(stations_data["longitude"][data.index],
                          stations_data["latitude"][data.index],
                          alpha=0.85,
-                         s=s,
+                         s=scatter_size,
                          c=np.round(data[column], 3),
                          cmap=cmap)
     #  Impresion de los mapas
@@ -48,11 +51,12 @@ def plot(stations_data: DataFrame, data: DataFrame, column: str, path: str, grap
                origin="lower")
     # Impresion del colorbar
     cbar = plt.colorbar(points,
-                        ticks=np.round(np.linspace(0, 0.024, 7), 3))
-    cbar.set_label("Distribución de uso de las estaciones",
+                        ticks=np.round(np.linspace(0, tick_max, 7), 3))
+    cbar.set_label("Distribución de uso de las estaciones\na partir del " +
+                   title,
                    rotation=-90,
                    fontsize=13,
-                   labelpad=20)
+                   labelpad=35)
     plt.tight_layout()
     # Guardado de la grafica
     plt.savefig("{}{}".format(path,
@@ -68,7 +72,7 @@ parameters = {"path map": "../Graphics/",
               "file data": "Repetition_station.csv",
               "file coordinates": "coordinates.csv",
               "file information": "nomenclatura.csv",
-              "count columns": ["Origen_Id"],
+              "count columns": ["Origen_Id", "Destino_Id"],
               "information columns": ["latitude", "longitude"]}
 # Lectura del mapa en una clase
 map = Map_class(parameters["path map"],
