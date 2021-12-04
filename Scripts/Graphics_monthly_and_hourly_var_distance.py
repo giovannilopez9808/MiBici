@@ -23,7 +23,8 @@ ylabels = ["Ene", "Feb", "Mar", "Abril", "May",
 data_mean = data_mean.drop(columns=[str(i) for i in range(6)])
 data_mean = data_mean.drop(columns="23")
 data_mean = np.array(data_mean)
-cmap = cm.get_cmap('magma', 10)
+data_mean = np.sqrt(data_mean)
+cmap = cm.get_cmap('magma', 9)
 plt.xticks(xticks,
            xlabels)
 plt.yticks(yticks+0.5,
@@ -34,12 +35,11 @@ plt.grid(ls="--",
          alpha=0.5,
          lw=1.5,
          axis="x")
-print(np.min(data_mean), np.max(data_mean))
 plt.imshow(data_mean,
            origin="lower",
            cmap=cmap,
-           vmin=0.6,
-           vmax=1.1,
+           vmin=0.75,
+           vmax=1.05,
            aspect="auto")
 for ytick in yticks:
     plt.plot([xticks[0], 16.5],
@@ -48,8 +48,8 @@ for ytick in yticks:
              color="#ffffff",
              alpha=0.5,
              lw=1.5)
-cbar = plt.colorbar(ticks=np.round(np.linspace(0.6, 1.1, 11), 2))
-cbar.set_label("Distancia promedio por viaje (min)",
+cbar = plt.colorbar(ticks=np.round(np.linspace(0.77, 1.04, 10), 2))
+cbar.set_label("Desviación estandar de la distancia por viaje (min)",
                rotation=-90,
                labelpad=15)
 plt.tight_layout()
