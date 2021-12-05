@@ -94,7 +94,7 @@ ggsave(paste(
     file_graphics,
     sep = ""
 ),
-height = 2043,
+height = 1200,
 width = 2793,
 limitsize = FALSE,
 units = "px"

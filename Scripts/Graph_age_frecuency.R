@@ -24,7 +24,7 @@ ggplot(
     ) +
     labs(
         title = paste(
-            "Frecuencia de usuarios por edades en el periodo 2015-2018"
+            "Frecuencia de usuarios por edad en el periodo 2015-2018"
         ),
         x = "Edad",
         y = "Número de usuarios"
@@ -58,7 +58,7 @@ ggsave(paste(path_graphics,
     file_graphic,
     sep = ""
 ),
-height = 2043,
+height = 1200,
 width = 2793,
 limitsize = FALSE,
 units = "px"

@@ -32,8 +32,8 @@ ggplot(
         )
     ) +
     scale_x_continuous(
-        breaks = seq(0, 40, 5),
-        limits = c(0, 40)
+        breaks = seq(0, 80, 5),
+        limits = c(0, 80)
     ) +
     scale_y_continuous(
         breaks = seq(0, 1200, 100),
@@ -41,15 +41,16 @@ ggplot(
     ) +
     labs(
         title = paste(
-            "Distribución del número de viajes por hora"
+            "Distribución del número de viajes"
         ),
         x = "Número de viajes",
+        y = ""
     )
 ggsave(paste(path_graphics,
     file_graphic,
     sep = ""
 ),
-height = 2043,
+height = 1200,
 width = 2793,
 limitsize = FALSE,
 units = "px"

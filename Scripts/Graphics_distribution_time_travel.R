@@ -41,7 +41,7 @@ ggplot(
     ) +
     labs(
         title = paste(
-            "Distribución de los tiempos por cada viaje"
+            "Distribución de los tiempos de uso de una bicicleta en el periodo 2015-2018"
         ),
         x = "Tiempo (min)",
     )
@@ -49,7 +49,7 @@ ggsave(paste(path_graphics,
     file_graphic,
     sep = ""
 ),
-height = 2043,
+height = 1200,
 width = 2793,
 limitsize = FALSE,
 units = "px"

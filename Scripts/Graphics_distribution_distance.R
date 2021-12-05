@@ -41,7 +41,7 @@ ggplot(
     ) +
     labs(
         title = paste(
-            "Distribución de las distancias por cada viaje"
+            "Distribución de las distancias recorridas en cada viaje"
         ),
         x = "Distancia (km)",
     )
@@ -49,7 +49,7 @@ ggsave(paste(path_graphics,
     file_graphic,
     sep = ""
 ),
-height = 2043,
+height = 1200,
 width = 2793,
 limitsize = FALSE,
 units = "px"
