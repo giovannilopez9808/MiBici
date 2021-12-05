@@ -5,7 +5,7 @@ from pylab import *
 parameters = {"path data": "../Output/",
               "file data": "Hourly_count_travel.csv",
               "path graphics": "../Graphics/",
-              "file graphics": "monthly_and_hourly_var_count_travel.png"}
+              "file graphics": "monthly_hourly_var_count_travel.png"}
 
 data = read_data(parameters["path data"],
                  parameters["file data"])
