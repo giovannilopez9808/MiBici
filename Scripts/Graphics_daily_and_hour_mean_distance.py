@@ -64,10 +64,10 @@ plt.imshow(data_mean,
            origin="lower",
            cmap=cmap,
            vmin=0.6,
-           vmax=1.4,
+           vmax=1.2,
            aspect='auto')
 plt.tight_layout()
-cbar = plt.colorbar(ticks=np.round(np.linspace(0.6, 1.4, 9), 2))
+cbar = plt.colorbar(ticks=np.round(np.linspace(0.6, 1.2, 9), 2))
 cbar.set_label("Promedio de la distancia recorrida (km)",
                rotation=-90,
                labelpad=15)

@@ -38,8 +38,8 @@ plt.grid(ls="--",
 plt.imshow(data_mean,
            origin="lower",
            cmap=cmap,
-           vmin=0.75,
-           vmax=1.05,
+           vmin=0.77,
+           vmax=1.04,
            aspect="auto")
 for ytick in yticks:
     plt.plot([xticks[0], 16.5],
