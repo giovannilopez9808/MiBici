@@ -1,0 +1,41 @@
+\section{Métodos y materiales}
+
+\subsection{Base de datos}
+
+\subsection{Promedio y varianza mensual por hora}
+
+Sea un conjunto $Q(m,h)$ de datos para un mes $m$  entre las horas $h$ y $h+1$ con elementos $q$, entonces el promedio mensual por hora se calcula como:
+
+\begin{equation}
+    \mu_{Q(m,h)} = \frac{1}{n(m,h)} \sum_{i=1}^{n(m,h)} q_i \label{eq:monthly_hourly_mean}
+\end{equation}
+
+y la varianza se calcula como:
+
+\begin{equation}
+    \sigma^2_{Q(m,h)} = \frac{1}{n(m,h)-1} \sum_{i=1}^{n(m,h)} (q_i - \mu_{Q(m,h)})^2 \qquad \begin{matrix}
+        m=1,2,\dots,12 \\
+        h=6,7,\dots,23
+    \end{matrix} \label{eq:monthly_hourly_var}
+\end{equation}
+
+donde $n(m,h)$ es el número total de elementos del conjunto $Q(m,h)$.
+
+\subsection{Promedio y varianza diaria semanal por hora}
+
+Sea un conjunto $Q(d,h)$ de datos para un día de la semana $d$  entre las horas $h$ y $h+1$ con elementos $q$, entonces el promedio diario semanal por hora se calcula como:
+
+\begin{equation}
+    \mu_{Q(d,h)} = \frac{1}{n(d,h)} \sum_{i=1}^{n(d,h)} q_i \label{eq:daily_hourly_mean}
+\end{equation}
+
+y la varianza se calcula como:
+
+\begin{equation}
+    \sigma^2_{Q(d,h)} = \frac{1}{n(d,h)-1} \sum_{i=1}^{n(d,h)} (q_i - \mu_{Q(d,h)})^2 \qquad \begin{matrix}
+        d=1,2,\dots,7 \\
+        h=6,7,\dots,23
+    \end{matrix} \label{eq:daily_hourly_var}
+\end{equation}
+
+donde $n(d,h)$ es el número total de elementos del conjunto $Q(d,h)$.

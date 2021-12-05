@@ -1,25 +1,8 @@
 \subsection{Tiempo de uso promedio de los usuarios}
 
-Los datos abiertos de MiBici contienen el tiempo inicial y final del uso de una bicicleta a traves de dos estaciones, las cuales pueden ser la misma.
+Los datos obtenidos de MiBici contienen el tiempo inicial y final del uso de una bicicleta durante su uso. En base a este tiempo calculado en minutos, se usaron las ecuaciones \ref{eq:monthly_hourly_mean}, \ref{eq:monthly_hourly_var}, \ref{eq:daily_hourly_mean} y \ref{eq:daily_hourly_var}. Los resultados obtenidos son los siguientes:
 
-\subsubsection{Promedios mensuales por hora}
-
-
-\begin{equation}
-    \bar{T}_{m,h} = \frac{1}{n_{(m,h)}} \sum_{i=1}^{n_{(m,n)}} \hat{T}_{i} \qquad \begin{matrix}
-        m=1,2,\dots,12 \\ h=6,7,\dots,23
-    \end{matrix} \label{eq:monthly_hourly_mean_time}
-\end{equation}
-
-donde $\hat{T}$ y $n_{(m,n)}$ es el conjunto de tiempos y la cantidad total de viajes realizados para el mes $m$ realizados entre las $h$ y $h+1$ horas respectivamente. De una manera semejante, se calculo la varianza de este conjunto con la ecuación \ref{eq:monthly_hourly_var_time}.
-
-\begin{equation}
-    \sigma^2_{T_{(m,h)}} = \frac{1}{n_{(m,h)}-1} \sum_{i=1}^{n_{(m,n)}} (T_i-\bar{T}_{(m,h)})^2 \qquad \begin{matrix}
-        m=1,2,\dots,12 \\ h=6,7,\dots,23
-    \end{matrix} \label{eq:monthly_hourly_var_time}
-\end{equation}
-
-En la figura \ref{fig:monthly_hourly_time} se muestran los resultados de aplicar las ecuaciones \ref{eq:monthly_hourly_mean_time} y \ref{eq:monthly_hourly_var_time} a los datos de los tiempos de uso.
+\subsubsection{Promedio y desviación estandar mensual por hora}
 
 En la figura \ref{fig:monthly_hourly_mean_time} se visualiza que existe un aumento en el tiempo de uso entre los meses octubre y diciembre. Este último coincide con el fin de la temporada con más frecuencia de lluvias y una disminución de la temperatura\cite{clima_guadalajara}. En la misma figura se presenta un mínimo entre los meses de mayo y agosto. Con ayuda de la figura \ref{fig:monthly_hourly_var_time} se obtiene que el tiempo de uso de los usuarios entre los meses de octubre y diciembre tienen una mayor variación y esto puede deberse a que la baja temperatura y baja probabilidad de lluvia\cite{clima_guadalajara}. Ya que los usuarios pueden sentir menos preocupación de las vías públicas y el usar la bicicleta representa más un momento de descanso que estar alerta de su alrededor.
 
@@ -35,29 +18,11 @@ En la figura \ref{fig:monthly_hourly_mean_time} se visualiza que existe un aumen
         \caption{Desviación estandar del tiempo de uso.}
         \label{fig:monthly_hourly_var_time}
     \end{subfigure}
-    \caption{Tiempo de uso promedio y desviación estandar mensual por hora de lo usuarios calculadas con las ecuaciones \ref{eq:monthly_hourly_mean_time} y \ref{eq:monthly_hourly_var_time}.}
+    \caption{Tiempo de uso promedio y desviación estandar mensual por hora de lo usuarios calculadas con las ecuaciones \ref{eq:monthly_hourly_mean} y \ref{eq:monthly_hourly_var}.}
     \label{fig:monthly_hourly_time}
 \end{figure}
 
-\subsubsection{Promedio diario semanal por hora}
-
-Otra manera de abordar los datos es realizando un promedio del día semanal por las horas del día. Esto se obtuvo aplicando la ecuación \ref{eq:daily_hourly_mean_distance} a los datos.
-
-\begin{equation}
-    \bar{T}_{d,h} = \frac{1}{n_{(d,h)}} = \sum_{i=1}^{n_{(d,h)}} \hat{T}_{i} \qquad \begin{matrix}
-        d=1,2,\dots,7 \\ h=6,7,\dots,23
-    \end{matrix} \label{eq:daily_hourly_mean_time}
-\end{equation}
-
-donde $T_i$ y $n_{(d,h)}$ es el conjunto y la cantidad total de viajes realizados para el día de la semana $d$ realizados entre las $h$ y $h+1$ horas respectivamente. De una manera semejante, se calculo la varianza de este conjunto con la ecuación \ref{eq:daily_hourly_var_time}.
-
-\begin{equation}
-    \sigma^2_{T_{(d,h)}} = \frac{1}{n_{(d,h)}-1} \sum_{i=1}^{n_{(d,h)}} (T_i-\bar{T}_{(d,h)})^2 \qquad \begin{matrix}
-        m=1,2,\dots,12 \\ h=6,7,\dots,23
-    \end{matrix} \label{eq:daily_hourly_var_time}
-\end{equation}
-
-En la figura \ref{fig:daily_hourly_time} se muestran los resultados de aplicar las ecuaciones \ref{eq:daily_hourly_mean_time} y \ref{eq:daily_hourly_var_time} a los datos de las distancias.
+\subsubsection{Promedio y desviación estandar diaria semanal por hora}
 
 En la figura \ref{fig:daily_hourly_time} se aprecia que no hay alguna preferencia en los tiempos de uso en los dias entre semana, por lo que se podria estimar un tiempo promedio por día para toda la semana. Con esto el factor más importante a tomar en cuenta es el mes del que se trate, ya que como se describió en la figura \ref{fig:monthly_hourly_time}, sí existen variaciones a lo largo del año. En la figura \ref{fig:daily_hourly_var_time} entre las 8 y 10 am se ve que existe una mayor variación en el tiempo de uso. Lo cual concuerda con lo antes mencionado en la figura \ref{fig:daily_hourly_var_distance}
 
@@ -73,6 +38,6 @@ En la figura \ref{fig:daily_hourly_time} se aprecia que no hay alguna preferenci
         \caption{Desviación estandar diaria semanal.}
         \label{fig:daily_hourly_var_time}
     \end{subfigure}
-    \caption{Tiempo de uso promedio y desviación estandar diaria semanal por hora de los usuarios calculadas con las ecuaciones \ref{eq:daily_hourly_mean_time} y \ref{eq:daily_hourly_var_time}.}
+    \caption{Tiempo de uso promedio y desviación estandar diaria semanal por hora de los usuarios calculadas con las ecuaciones \ref{eq:daily_hourly_mean} y \ref{eq:daily_hourly_var}.}
     \label{fig:daily_hourly_time}
 \end{figure}

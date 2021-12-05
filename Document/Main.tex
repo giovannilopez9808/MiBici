@@ -13,8 +13,12 @@
 {2cm}
 \input{Files/titulo.tex}
 \tableofcontents
+\pagebreak
 \input{Files/introduccion.tex}
+\input{Files/methodology.tex}
 \input{Files/results.tex}
 \bibliographystyle{vancouver}
+\let\Section\section
+\def\section*#1{\Section{#1}}
 \bibliography{references}
 \end{document}
