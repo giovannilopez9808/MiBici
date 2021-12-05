@@ -16,7 +16,7 @@ def set_day_of_the_week(data: DataFrame, parameters: dict) -> DataFrame:
 parameters = {"path data": "../Output/",
               "file data": "Hourly_mean_time_travel.csv",
               "path graphics": "../Graphics/",
-              "file graphics": "daily_and_hour_mean_time_travel.png",
+              "file graphics": "daily_hourly_mean_time_travel.png",
               "days": {"lunes": "1",
                        "martes": "2",
                        "miércoles": "3",
@@ -40,8 +40,6 @@ xlabels = [int(xlabel) for xlabel in xlabels]
 data_mean = data_mean.drop(columns=[str(i) for i in range(6)])
 data_mean = data_mean.drop(columns="23")
 data_mean = np.array(data_mean)
-print(np.min(data_mean))
-print(np.max(data_mean))
 cmap = cm.get_cmap('Greens', 7)
 plt.xticks(xticks,
            xlabels)

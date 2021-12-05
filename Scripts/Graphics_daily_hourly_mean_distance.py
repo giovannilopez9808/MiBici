@@ -16,7 +16,7 @@ def set_day_of_the_week(data: DataFrame, parameters: dict) -> DataFrame:
 parameters = {"path data": "../Output/",
               "file data": "Hourly_mean_distance.csv",
               "path graphics": "../Graphics/",
-              "file graphics": "daily_and_hour_mean_distance.png",
+              "file graphics": "daily_hourly_mean_distance.png",
               "days": {"lunes": "1",
                        "martes": "2",
                        "miércoles": "3",
@@ -58,8 +58,6 @@ for ytick in yticks:
              color="#000000",
              alpha=0.5,
              lw=1.5)
-print(np.min(data_mean))
-print(np.max(data_mean))
 plt.imshow(data_mean,
            origin="lower",
            cmap=cmap,

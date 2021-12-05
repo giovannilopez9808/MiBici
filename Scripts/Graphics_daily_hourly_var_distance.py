@@ -16,7 +16,7 @@ def set_day_of_the_week(data: DataFrame, parameters: dict) -> DataFrame:
 parameters = {"path data": "../Output/",
               "file data": "Hourly_mean_distance.csv",
               "path graphics": "../Graphics/",
-              "file graphics": "daily_and_hour_var_distance.png",
+              "file graphics": "daily_hourly_var_distance.png",
               "days": {"lunes": "1",
                        "martes": "2",
                        "miércoles": "3",

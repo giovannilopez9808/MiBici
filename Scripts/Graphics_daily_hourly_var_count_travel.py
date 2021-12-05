@@ -41,8 +41,6 @@ data_mean = data_mean.drop(columns=[str(i) for i in range(6)])
 data_mean = data_mean.drop(columns="23")
 data_mean = np.array(data_mean)
 data_mean = np.sqrt(data_mean)
-print(np.min(data_mean))
-print(np.max(data_mean))
 cmap = cm.get_cmap('Greens', 10)
 plt.xticks(xticks,
            xlabels)
