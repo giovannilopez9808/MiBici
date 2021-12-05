@@ -3,7 +3,7 @@ path_data <- "../Output/"
 file_data <- "Age_frecuency.csv"
 path_graphics <- "../Graphics/"
 file_graphic <- "age_distribution.png"
-mu <- 33.62
+mu <- 31.68
 data <- read.csv(paste(path_data,
     file_data,
     sep = ""
@@ -36,14 +36,14 @@ ggplot(
         breaks = seq(16, 80, 2),
         limits = c(16, 80)
     ) +
-    # annotate("text",
-    #     x = mu + 8,
-    #     y = 3300,
-    #     label = paste(
-    #         "mean =",
-    #         round(mu, 2)
-    #     )
-    # ) +
+     annotate("label",
+         x = mu + 4,
+         y = 3100,
+         label = paste(
+             "Mean:", round(mu, 2)
+         ),
+         size=3
+     ) +
     theme(
         panel.background = element_rect(
             fill = "white",
@@ -54,6 +54,7 @@ ggplot(
             linetype = "dashed"
         )
     )
+  
 ggsave(paste(path_graphics,
     file_graphic,
     sep = ""
