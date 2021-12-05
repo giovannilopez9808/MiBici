@@ -126,8 +126,8 @@ def create_stations_dataframe(index: list, columns: list, use_float=False) -> Da
 
 def obtain_distance_bewteen_points(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     rad = np.pi/180
-    dlat = lat2-lat1
-    dlon = lon2-lon1
+    dlat = abs(lat2-lat1)
+    dlon = abs(lon2-lon1)
     R = 6372.795477598
     a = (np.sin(rad*dlat/2))**2 + np.cos(rad*lat1) * \
         np.cos(rad*lat2)*(np.sin(rad*dlon/2))**2
