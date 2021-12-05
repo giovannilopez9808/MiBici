@@ -16,7 +16,7 @@ def set_day_of_the_week(data: DataFrame, parameters: dict) -> DataFrame:
 parameters = {"path data": "../Output/",
               "file data": "Hourly_count_travel.csv",
               "path graphics": "../Graphics/",
-              "file graphics": "daily_and_hour_mean_count_travel.png",
+              "file graphics": "daily_hourly_mean_count_travel.png",
               "days": {"lunes": "1",
                        "martes": "2",
                        "miércoles": "3",
@@ -40,6 +40,8 @@ xlabels = [int(xlabel) for xlabel in xlabels]
 data_mean = data_mean.drop(columns=[str(i) for i in range(6)])
 data_mean = data_mean.drop(columns="23")
 data_mean = np.array(data_mean)
+print(np.min(data_mean))
+print(np.max(data_mean))
 cmap = cm.get_cmap('Greens', 10)
 plt.xticks(xticks,
            xlabels)
@@ -62,13 +64,13 @@ plt.imshow(data_mean,
            origin="lower",
            cmap=cmap,
            vmin=0,
-           vmax=100,
+           vmax=70,
            aspect='auto')
 plt.tight_layout()
-cbar = plt.colorbar(ticks=np.linspace(0, 100, 11))
+cbar = plt.colorbar(ticks=np.linspace(0, 70, 11))
 cbar.set_label("Promedio del número de viajes",
                rotation=-90,
-               labelpad=8)
+               labelpad=20)
 plt.savefig("{}{}".format(parameters["path graphics"],
                           parameters["file graphics"]),
             dpi=400)

@@ -49,9 +49,9 @@ for ytick in yticks:
              alpha=0.5,
              lw=1.5)
 cbar = plt.colorbar(ticks=np.round(np.linspace(0.77, 1.04, 10), 2))
-cbar.set_label("Desviación estandar de la distancia por viaje (min)",
+cbar.set_label("Desviación estandar de la distancia por viaje (km)",
                rotation=-90,
-               labelpad=15)
+               labelpad=20)
 plt.tight_layout()
 plt.savefig("{}{}".format(parameters["path graphics"],
                           parameters["file graphics"]),

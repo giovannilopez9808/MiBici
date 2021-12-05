@@ -48,9 +48,9 @@ for ytick in yticks:
              alpha=0.5,
              lw=1.5)
 cbar = plt.colorbar(ticks=np.round(np.linspace(1.2, 1.65, 10), 2))
-cbar.set_label("Distancia promedio por viaje (min)",
+cbar.set_label("Distancia promedio por viaje (km)",
                rotation=-90,
-               labelpad=15)
+               labelpad=20)
 plt.tight_layout()
 plt.savefig("{}{}".format(parameters["path graphics"],
                           parameters["file graphics"]),
