@@ -23,7 +23,7 @@ ylabels = ["Ene", "Feb", "Mar", "Abril", "May",
 data_mean = data_mean.drop(columns=[str(i) for i in range(6)])
 data_mean = data_mean.drop(columns="23")
 data_mean = np.array(data_mean)
-cmap = cm.get_cmap('magma', 9)
+cmap = cm.get_cmap('magma', 10)
 plt.xticks(xticks,
            xlabels)
 plt.yticks(yticks+0.5,
@@ -37,8 +37,8 @@ plt.grid(ls="--",
 plt.imshow(data_mean,
            origin="lower",
            cmap=cmap,
-           vmin=1.2,
-           vmax=1.65,
+           vmin=0.6,
+           vmax=1.1,
            aspect="auto")
 for ytick in yticks:
     plt.plot([xticks[0], 16.5],
@@ -47,7 +47,7 @@ for ytick in yticks:
              color="#ffffff",
              alpha=0.5,
              lw=1.5)
-cbar = plt.colorbar(ticks=np.round(np.linspace(1.2, 1.65, 10), 2))
+cbar = plt.colorbar(ticks=np.round(np.linspace(0.6, 1.1, 11), 2))
 cbar.set_label("Distancia promedio por viaje (km)",
                rotation=-90,
                labelpad=20)
