@@ -1,19 +1,24 @@
 \section{Métodos y materiales}
 
 \subsection{Base de datos}
-MiBici cuenta con una página de datos abiertos en la que se puede acceder a una base de datos de uso de este sistema de transporte. En la página se puede acceder a una serie de archivos CSV (valores separados por comas) con información mensual de los viajes realizados desde diciembre de 2014 hasta noviembre de 2021.
-\par Los datos de los viajes están separados en archivos correspondientes a cada mes. Cada uno de los renglones de estos archivos CSV cuenta con la información de un viaje realizado. Los campos registrados para cada uno de los viajes en la base de datos son los siguientes: 
+
+MiBici cuenta con una página de datos abiertos en la que se puede acceder a una base de datos de uso de este sistema de transporte\cite{mibici_data}. En la página se puede acceder a una serie de archivos CSV (valores separados por comas) con información mensual de los viajes realizados desde diciembre de 2014 hasta noviembre de 2021.
+
+Los datos de los viajes están separados en archivos correspondientes a cada mes. Cada uno de los renglones de estos archivos CSV cuenta con la información de un viaje realizado. Los campos registrados para cada uno de los viajes en la base de datos son los siguientes:
+
 \begin{itemize}
-	\item \bfseries{Viaje\_Id }\normalfont \\ Número de identificación del viaje.
-	\item \bfseries{Usuario\_Id }\normalfont\\ Número único de identificación del usuario.
-	\item \bfseries{Genero }\normalfont 
-	\item \bfseries{Año\_de\_nacimiento }
-	\item \bfseries{Inicio\_del\_viaje} \normalfont \\ Fecha de inicio del viaje en formato \lstinline|aaaa-mm-dd| seguida de un espacio y la hora, minuto y segundo de inicio en formato de $24$ horas.
-	\item \bfseries{Fin\_del\_viaje }\normalfont \\ Fecha y hora de fin del viaje en el mismo formato.
-	\item \bfseries{Origen\_Id }\normalfont \\ Número de identificación de la estación de salida.
-	\item \bfseries{Destino\_Id }\normalfont \\ Número de identificación de la estación de llegada.
+    \item \bfseries{Viaje\_Id }\normalfont \\ Número de identificación del viaje.
+    \item \bfseries{Usuario\_Id }\normalfont\\ Número único de identificación del usuario.
+    \item \bfseries{Genero }\normalfont
+    \item \bfseries{Año\_de\_nacimiento }
+    \item \bfseries{Inicio\_del\_viaje} \normalfont \\ Fecha de inicio del viaje en formato \lstinline|aaaa-mm-dd| seguida de un espacio y la hora, minuto y segundo de inicio en formato de $24$ horas.
+    \item \bfseries{Fin\_del\_viaje }\normalfont \\ Fecha y hora de fin del viaje en el mismo formato.
+    \item \bfseries{Origen\_Id }\normalfont \\ Número de identificación de la estación de salida.
+    \item \bfseries{Destino\_Id }\normalfont \\ Número de identificación de la estación de llegada.
 \end{itemize}
+
 Así mismo el sistema nos brinda un archivo CSV con la nomenclatura de las estaciones. Lo que nos permite utilizar los identificadores de origen y destino para acceder a información correspondiente a la dirección, ubicación y estado de servicio de cada estación.
+
 \subsection{Promedio y varianza mensual por hora}
 
 Sea un conjunto $Q(m,h)$ de datos para un mes $m$  entre las horas $h$ y $h+1$ con elementos $q$, entonces el promedio mensual por hora se calcula como:
