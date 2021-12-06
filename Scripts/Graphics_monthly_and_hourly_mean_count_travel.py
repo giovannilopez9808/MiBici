@@ -48,7 +48,7 @@ plt.imshow(data_mean,
            vmax=80,
            aspect="auto")
 cbar = plt.colorbar(ticks=np.linspace(0, 80, 9))
-cbar.set_label("Promedio de los viajes realizados",
+cbar.set_label("Promedio de usuarios simultáneos",
                rotation=-90,
                labelpad=20)
 plt.tight_layout()

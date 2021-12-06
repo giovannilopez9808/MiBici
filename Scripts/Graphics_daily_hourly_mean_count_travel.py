@@ -66,7 +66,7 @@ plt.imshow(data_mean,
            aspect='auto')
 plt.tight_layout()
 cbar = plt.colorbar(ticks=np.linspace(0, 70, 11))
-cbar.set_label("Promedio del número de viajes",
+cbar.set_label("Promedio del número de usuarios simultáneos",
                rotation=-90,
                labelpad=20)
 plt.savefig("{}{}".format(parameters["path graphics"],

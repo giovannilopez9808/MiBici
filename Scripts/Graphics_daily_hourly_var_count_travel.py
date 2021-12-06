@@ -67,7 +67,7 @@ plt.imshow(data_mean,
            aspect='auto')
 plt.tight_layout()
 cbar = plt.colorbar(ticks=np.linspace(6, 112, 11))
-cbar.set_label("Desviación estandar del número de viajes",
+cbar.set_label("Desviación estandar del número de usuarios simultáneos",
                rotation=-90,
                labelpad=20)
 plt.savefig("{}{}".format(parameters["path graphics"],

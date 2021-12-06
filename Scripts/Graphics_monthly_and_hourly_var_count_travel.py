@@ -51,7 +51,7 @@ plt.imshow(data_mean,
            vmax=120,
            aspect="auto")
 cbar = plt.colorbar(ticks=np.linspace(0, 120, 9))
-cbar.set_label("Desviación total del los viajes realizados",
+cbar.set_label("Desviación estandar del número de usuarios simultáneos",
                rotation=-90,
                labelpad=15)
 plt.tight_layout()
