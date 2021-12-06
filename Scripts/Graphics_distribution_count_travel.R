@@ -42,7 +42,7 @@ ggplot(
     ) +
     labs(
         title = paste(
-            "Distribución del número de viajes"
+            "Distribución del número de usuarios simultáneos en el periodo 2015-2018"
         ),
         x = "Número de viajes",
         y = ""
