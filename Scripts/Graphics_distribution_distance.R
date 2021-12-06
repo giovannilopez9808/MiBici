@@ -16,9 +16,10 @@ ggplot(
     data = data,
     aes(value, fill = value)
 ) +
-    geom_density(
+    geom_histogram(
         aes(y = ..count..),
         alpha = 0.5,
+        bins = 100,
         fill = "#52b69a"
     ) +
     theme(
@@ -36,14 +37,15 @@ ggplot(
         limits = c(0, 3)
     ) +
     scale_y_continuous(
-        breaks = seq(0, 8000, 500),
-        limits = c(0, 8000)
+        breaks = seq(0, 1500, 100),
+        limits = c(0, 1500)
     ) +
     labs(
         title = paste(
             "Distribución de las distancias recorridas en cada viaje"
         ),
         x = "Distancia (km)",
+        y = ""
     )
 ggsave(paste(path_graphics,
     file_graphic,

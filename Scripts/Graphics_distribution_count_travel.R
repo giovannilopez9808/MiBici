@@ -16,9 +16,10 @@ ggplot(
     data = data,
     aes(value, fill = value)
 ) +
-    geom_density(
+    geom_histogram(
         aes(y = ..count..),
         alpha = 0.5,
+        bins = 81,
         fill = "#52b69a"
     ) +
     theme(

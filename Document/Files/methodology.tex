@@ -39,3 +39,13 @@ y la varianza se calcula como:
 \end{equation}
 
 donde $n(d,h)$ es el número total de elementos del conjunto $Q(d,h)$.
+
+\subsection{Promedio por hora dada una fecha}
+
+Sea un conjunto $Q(f,h)$ de datos para una fecha $f$ con formato yyyy-mm-dd  entre las horas $h$ y $h+1$ con elementos $q$, entonces el promedio por hora es calculado como
+
+\begin{equation}
+    \mu_{Q(f,h)} = \frac{1}{n(f,h)} \sum_{i=1}^{n(f,h)} q_i \label{eq:hourly_mean}
+\end{equation}
+
+donde $n(f,h)$ es el número total de elementos del conjunto $Q(f,h)$.
