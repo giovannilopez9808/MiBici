@@ -70,16 +70,18 @@ p <- ggplot(
             linetype = "dashed"
         )
     ) +
-    # annotate("text",
-    #     x = f_mean + 10,
-    #     y = 1700,
-    #     label = TeX(paste("$\\mu_F =$", round(f_mean, 2)))
-    # ) +
-    # annotate("text",
-    #     x = m_mean + 10,
-    #     y = 1900,
-    #     label = TeX(paste("$\\mu_M =$", round(m_mean, 2)))
-    # ) +
+     annotate("label",
+         x = f_mean - 2,
+         y = 1300,
+         label = paste(round(f_mean, 2)),
+         size=3
+     ) +
+     annotate("label",
+         x = m_mean + 2,
+         y = 1200,
+        label = paste(round(m_mean, 2)),
+        size=3
+     ) +
     labs(
         title = paste(
             "Número de usuarios por edad y género en el periodo 2015-2018"
