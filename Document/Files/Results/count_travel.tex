@@ -1,10 +1,10 @@
-\subsection{Número promedio de viajes}
+\subsection{Número promedio de usuarios simultáneos}
 
-Los datos abiertos de MiBici contienen un identificador de usuario, por lo que se puede saber el número de viajes realizados en un día por todos los usuarios. En base a este tiempo calculado en minutos, se usaron las ecuaciones \ref{eq:monthly_hourly_mean}, \ref{eq:monthly_hourly_var}, \ref{eq:daily_hourly_mean} y \ref{eq:daily_hourly_var}. Los resultados obtenidos son los siguientes:
+En base a este tiempo calculado en minutos, se usaron las ecuaciones \ref{eq:monthly_hourly_mean}, \ref{eq:monthly_hourly_var}, \ref{eq:daily_hourly_mean} y \ref{eq:daily_hourly_var}. Los resultados obtenidos son los siguientes:
 
 \subsubsection{Promedio y desviación estandar mensual por hora}
 
-En la figura \ref{fig:monthly_hourly_count_travel} se visualiza que existe un aumento en el número de viajes entre los meses septiembre y diciembre. Lo cual coincide con lo antes planteado con las figuras \ref{fig:monthly_hourly_distance} y \ref{fig:monthly_hourly_time}. En la figura \ref{fig:monthly_hourly_var_count_travel} se observa como el número de usuarios tiene una variación mayor a las 8, y 18 horas. Esto puede deberse a la elección de los usuarios por que servicio de transporte público les hes mejor tomar en un día.
+En la figura \ref{fig:monthly_hourly_count_travel} se visualiza que existe un aumento en el número de usuarios entre los meses septiembre y diciembre. Lo cual coincide con lo antes planteado con las figuras \ref{fig:monthly_hourly_distance} y \ref{fig:monthly_hourly_time}. En la figura \ref{fig:monthly_hourly_var_count_travel} se observa como el número de usuarios tiene una variación mayor a las 8, y 18 horas. Esto puede deberse a la elección de los usuarios por cual servicio de transporte público les hes mejor tomar en un día.
 
 \begin{figure}[H]
     \centering
@@ -24,7 +24,7 @@ En la figura \ref{fig:monthly_hourly_count_travel} se visualiza que existe un au
 
 \subsubsection{Promedios diarios semanales por hora}
 
-En la figura \ref{fig:daily_hourly_mean_count_travel} se aprecia que existe una predilección en utilizar el servicio de bicicleta entre semana a las 8 y 16 horas. Existiendo un mínimo en el horario de 17 a 23 horas los días sabados y domingos. Con la figura \ref{fig:daily_hourly_var_count_travel} se observa que en el periodo donde existe un máximo, este presenta una gran variación, lo cual concuerda con lo encontrado en la figura \ref{fig:monthly_hourly_var_count_travel}. Por ende, se puede suponer que los usuarios que utilizan el servicio en ese periodo de tiempo pueden no ser recurrentes y usarlo cuando les sea necesario, más no es su primera opción.
+En la figura \ref{fig:daily_hourly_mean_count_travel} se aprecia que existe una predilección en utilizar el servicio de bicicleta entre semana a las 8 y 16 horas. Existiendo un mínimo en el horario de 17 a 23 horas los días sabados y domingos. Con la figura \ref{fig:daily_hourly_var_count_travel} se observa que en el periodo donde existe un máximo, este presenta una gran variación, lo cual concuerda con lo encontrado en la figura \ref{fig:monthly_hourly_var_count_travel}. Por ende, se puede suponer que los usuarios que utilizan el servicio en ese periodo de tiempo pueden no ser recurrentes y lo usarlo cuando les sea necesario, más no es su primera opción.
 
 \begin{figure}[H]
     \centering
@@ -42,13 +42,13 @@ En la figura \ref{fig:daily_hourly_mean_count_travel} se aprecia que existe una 
     \label{fig:daily_hourly_count_travel}
 \end{figure}
 
-\subsubsection{Distribución del número de viajes}
+\subsubsection{Distribución del número de usuarios simultáneo}
 
-Con el conteo de números de viajes, se realizo el calculo de su promedio usando la ecuación \ref{eq:hourly_mean}. La distribución de los datos obtenidos se representa en la figura \ref{fig:distribution_count_travel}. En donde se visualiza como es que existe una mayor frecuencia en su poco uso simultaneo y los casos en donde una gran cantidad de bicicletas estas siendo sadas simultaneamente es poco común.
+Con el conteo de números de viajes, se realizo el calculo del promedio usando la ecuación \ref{eq:hourly_mean}. La distribución de los datos obtenidos se representa en la figura \ref{fig:distribution_count_travel}. En donde se visualiza que existe una mayor frecuencia para pocos usuarios simultáneos y los casos en donde una gran cantidad de bicicletas siendo usadas de manera simultánea es poco común.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=16cm]{Graphics/distribution_count_travel.png}
-    \caption{Distribución del número de viajes en el periodo 2015-2018.}
+    \caption{Distribución del número de usuarios simultáneos en el periodo 2015-2018.}
     \label{fig:distribution_count_travel}
 \end{figure}
